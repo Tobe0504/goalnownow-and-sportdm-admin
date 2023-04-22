@@ -11,7 +11,6 @@
 
 .container {
   width: 100%;
-  border: 2px solid red;
 }
 
 .header {
@@ -28,20 +27,17 @@
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  border: 2px solid yellow;
 }
 
 .leftSection {
   width: 250px;
-  /* height: 90vh; */
   overflow: auto;
-  border: 2px solid yellow;
+  border-right: 1px solid #1c1c1c;
 }
 
 .middleSection {
   width: calc(100% - 250px);
   box-sizing: border-box;
-  border: 2px solid yellow;
 }
 
 .middleSection::-webkit-scrollbar,

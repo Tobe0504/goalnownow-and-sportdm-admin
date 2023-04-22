@@ -1,0 +1,101 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2.5%;
+}
+
+.headerContainer > h4 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.headerContainer > button {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  background: #ffd91b;
+  border-radius: 6px;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.navSection {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: var(--foregroundBlack);
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.navSection::-webkit-scrollbar {
+  display: none;
+}
+
+.navSection {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.navSection > a {
+  font-size: 14px;
+  line-height: 21px;
+  height: 100%;
+  display: block;
+  text-align: center;
+  width: 50%;
+  flex-basis: 50%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.navSection > a > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  padding: 15px 0;
+}
+
+.activeNav {
+  color: #ffd91b;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.activeIndicator {
+  width: 100%;
+  background-color: #ffd91b;
+  height: 4px;
+  border-radius: 100px;
+  animation: appear 0.3s ease-in-out;
+}
+
+.goalNowNowAds {
+  padding: 1rem 1rem;
+}

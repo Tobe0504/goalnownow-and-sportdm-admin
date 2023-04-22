@@ -19,10 +19,7 @@ const Header = () => {
       <div className={classes.responsivemenu}>
         <FontAwesomeIcon icon={faBars} onClick={openSideMenu} />
       </div>
-      <div className={classes.logosection}>
-        <img src={goalNowNowLogo} alt="GoalNowNow Logo" /> &{" "}
-        <img src={sportDmLogo} alt="GoalNowNow Logo" />
-      </div>
+      <div className={classes.logosection}>GNN & Sportdm Admin</div>
 
       <div className={classes.dropdownSection}></div>
       {/* <div className={classes.searchSection}>

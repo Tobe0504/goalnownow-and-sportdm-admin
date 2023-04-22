@@ -1,0 +1,48 @@
+.container {
+}
+
+.listItem {
+  padding: 0.75rem 1rem;
+  background: var(--foregroundBlack);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.adName {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  animation: appear 0.3s ease-in-out;
+}
+
+.rightSection > div:nth-child(2),
+.rightSection > div:nth-child(3) {
+  border: 2px solid yellow;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.rightSection > div:nth-child(3):hover {
+  color: red;
+}
