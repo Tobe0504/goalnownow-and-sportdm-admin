@@ -1,0 +1,175 @@
+.outerContainer {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.outerContainer > div:nth-child(1),
+.outerContainer > div:nth-child(3) {
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  border: 2px solid red;
+}
+
+.header {
+  height: 10vh;
+  position: sticky;
+  top: 0vh;
+  z-index: 20;
+  background: var(--foregroundBlack);
+}
+
+.body {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  border: 2px solid yellow;
+}
+
+.leftSection {
+  width: 250px;
+  /* height: 90vh; */
+  overflow: auto;
+  border: 2px solid yellow;
+}
+
+.middleSection {
+  width: calc(100% - 250px);
+  box-sizing: border-box;
+  border: 2px solid yellow;
+}
+
+.middleSection::-webkit-scrollbar,
+.leftSection::-webkit-scrollbar,
+.rightSection::-webkit-scrollbar {
+  display: none;
+}
+
+.middleSection,
+.leftSection,
+.rightSection {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.rightSection {
+  width: 250px;
+}
+
+.children {
+  min-height: 90vh;
+}
+
+.searchSection {
+  position: relative;
+  height: 35px;
+}
+
+.searchSection > input {
+  width: 100%;
+  height: 100%;
+  background: var(--backgroundBlack);
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  padding-left: 30px;
+  color: #ffffff;
+}
+
+.searchSection > input::placeholder {
+  color: #3c393a;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.searchSection > i {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.adContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.mobileAdContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .rightSection,
+  .leftSection {
+    display: none;
+  }
+
+  .outerContainer > div:nth-child(1),
+  .outerContainer > div:nth-child(3) {
+    display: none;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .middleSection {
+    width: 100%;
+  }
+
+  .adContainer {
+    display: none;
+  }
+
+  .mobileAdContainer {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1200px) {
+  .rightSection,
+  .leftSection {
+    display: none;
+  }
+
+  .outerContainer > div:nth-child(1),
+  .outerContainer > div:nth-child(3) {
+    display: none;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .middleSection {
+    width: 100%;
+  }
+
+  .adContainer {
+    display: none;
+  }
+
+  .mobileAdContainer {
+    display: block;
+  }
+}

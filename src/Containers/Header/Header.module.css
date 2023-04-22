@@ -1,0 +1,252 @@
+@keyframes appear {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  padding: 0 0rem;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  border-bottom: 2px solid #ffd91b;
+  background: var(--backgroundBlack);
+  position: relative;
+}
+
+.container > div {
+  align-self: stretch;
+}
+
+.logosection {
+  display: flex;
+  align-items: center;
+  border: 2px solid red;
+  font-weight: 700;
+}
+
+.logosection > img {
+  height: 100%;
+  width: 110px;
+}
+
+.navItemSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 378px;
+  height: 100%;
+}
+
+.navItemSection > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.activeIndicator {
+  width: 100%;
+  background-color: #ffd91b;
+  height: 4px;
+  border-radius: 100px;
+  animation: appear 0.3s ease-in-out;
+}
+
+.countryDropdownContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.countryDropdownContainer > img {
+  height: 16px;
+  width: 22px;
+}
+
+.dropdownSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* width: 30%; */
+  box-sizing: border-box;
+}
+
+.dropdownSection > div:nth-child(1) {
+  /* width: 35%; */
+  width: 100px;
+}
+
+.dropdownSection > div:nth-child(2) {
+  /* width: 60%; */
+  /* height: 37px; */
+  width: 148px;
+}
+
+.activeNav {
+  color: #ffd91b;
+}
+
+.responsivemenu,
+.searchSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.sideNav {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 0;
+  background: var(--foregroundBlack);
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.sideNavInner {
+  min-width: 100vw;
+  height: 100%;
+}
+
+.sideContainer {
+  padding: 0 1rem;
+}
+
+.sideNav .btnClose {
+  border: none;
+  display: flex;
+  margin-left: auto;
+  margin-right: 1rem;
+  font-size: 36px;
+  background: transparent;
+  color: #ffffff;
+  text-align: right;
+}
+
+.navItemResponsive {
+  margin: 1rem 0;
+}
+
+.searchSection {
+  position: relative;
+  height: 50px;
+}
+
+.searchSection > input {
+  width: 100%;
+  height: 100%;
+  background: var(--backgroundBlack);
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  padding-left: 60px;
+  color: #ffffff;
+}
+
+.searchSection > input::placeholder {
+  color: #3c393a;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.searchSection > i {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .navItemSection,
+  .dropdownSection {
+    display: none;
+  }
+
+  .responsivemenu,
+  .searchSection {
+    display: inline-flex;
+    font-size: 1.2rem;
+  }
+
+  .logosection {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .navItemSection,
+  .dropdownSection {
+    display: none;
+  }
+
+  .responsivemenu,
+  .searchSection {
+    display: inline-flex;
+    font-size: 1.2rem;
+  }
+
+  .logosection {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 60%;
+  }
+}
