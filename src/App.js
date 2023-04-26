@@ -9,6 +9,7 @@ import GoalNowNowAds from "./Containers/GoalNowNowAds/GoalNowNowAds";
 import SportDmAds from "./Containers/SportDmAds/SportDmAds";
 import CreateAd from "./Containers/CreateAd/CreateAd";
 import EditAd from "./Containers/EditAd/EditAd";
+import Login from "./Containers/Login/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/ads/sportdm" element={<SportDmAds />} />
         <Route path="/ads/create-new-ad" element={<CreateAd />} />
         <Route path="/ads/edit-ad/:id" element={<EditAd />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

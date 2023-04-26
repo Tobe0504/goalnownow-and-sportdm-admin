@@ -1,0 +1,126 @@
+.innerContainer1 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.innerContainer1 > img {
+  width: 100%;
+  height: 100%;
+}
+
+.innerContainer2Outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  min-height: 550px;
+  padding: 2rem;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+}
+
+.cancel {
+  position: absolute;
+  left: 25px;
+  top: 30px;
+  cursor: pointer;
+}
+
+.innerContainer2 {
+  width: 100%;
+}
+
+.header {
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--primaryColor);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.alert {
+  margin-bottom: 2rem;
+}
+
+.innerContainer2 > form > div {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.innerContainer2 > form > span:nth-child(4) {
+  margin-bottom: 0;
+}
+
+.innerContainer2 > form > div > label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.innerContainer2 > form > div > input {
+  width: 100%;
+  height: 44px;
+  font-size: 1rem;
+  padding: 0 10px;
+  background: #eff0f2;
+  border: none;
+  outline: none;
+}
+
+.buttonSection {
+  text-align: center;
+}
+
+.buttonSection > button {
+  border: none;
+  padding: 0.8rem 1rem;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  font-weight: 600;
+  color: #000000;
+  background-color: yellow;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.or {
+  text-align: center;
+  font-weight: 600;
+}
+
+.googleSignUpContainer {
+  text-align: center;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.googleSignUp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid #d2d2d2;
+  width: auto;
+  padding: 0.5rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.googleSignUp > span:nth-child(1) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newPasswordSetupAlready {
+  color: var(--newGreen);
+  text-decoration: underline;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+}

@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AdContextProvider from "./Context/AdContext";
+import AuthContextProvider from "./Context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AdContextProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </AdContextProvider>
+  <AuthContextProvider>
+    <AdContextProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </AdContextProvider>
+  </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
