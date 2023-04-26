@@ -8,6 +8,7 @@ import {
 import GoalNowNowAds from "./Containers/GoalNowNowAds/GoalNowNowAds";
 import SportDmAds from "./Containers/SportDmAds/SportDmAds";
 import CreateAd from "./Containers/CreateAd/CreateAd";
+import EditAd from "./Containers/EditAd/EditAd";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/ads/goalnownow" element={<GoalNowNowAds />} />
         <Route path="/ads/sportdm" element={<SportDmAds />} />
         <Route path="/ads/create-new-ad" element={<CreateAd />} />
+        <Route path="/ads/edit-ad/:id" element={<EditAd />} />
       </Routes>
     </Router>
   );

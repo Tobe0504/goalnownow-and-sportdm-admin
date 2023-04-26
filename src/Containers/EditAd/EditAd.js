@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../Components/Layout/Layout";
+import classes from "./EditAd.module.css";
 import { AdContext } from "../../Context/AdContext";
-import classes from "./CreateAd.module.css";
+
 import {
   countries,
   goalNowNowPagesAndSections,
@@ -19,10 +21,14 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
-import { useNavigate } from "react-router-dom";
 
-const CreateAd = () => {
-  // States
+const EditAd = () => {
+  //   const { adId } = useParams();
+
+  // navigate
+  const navigate = useNavigate();
+
+  //   State
   const [options, setOptions] = useState([]);
 
   //   Context
@@ -117,9 +123,6 @@ const CreateAd = () => {
     // eslint-disable-next-line
   }, [page]);
 
-  // navigate
-  const navigate = useNavigate();
-
   return (
     <Layout>
       <div className={classes.container}>
@@ -136,7 +139,7 @@ const CreateAd = () => {
               navigate(-1);
             }}
           >
-            Create Ad
+            Edit Ad
           </h4>
         </div>
 
@@ -311,7 +314,7 @@ const CreateAd = () => {
           <div className={classes.buttonSection}>
             <span>
               <button className={classes.uploadButton} onClick={createAd}>
-                Create Ad
+                Update Ad
               </button>
             </span>
           </div>
@@ -322,4 +325,4 @@ const CreateAd = () => {
   );
 };
 
-export default CreateAd;
+export default EditAd;

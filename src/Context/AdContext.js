@@ -20,7 +20,7 @@ const AdContextProvider = (props) => {
   const createAd = () => {
     axios
       .post(
-        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/createAds`,
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}api/v1/all?id=2`,
         {
           data: {
             width,
