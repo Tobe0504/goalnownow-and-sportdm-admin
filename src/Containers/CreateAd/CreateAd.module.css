@@ -1,0 +1,141 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2.5%;
+}
+
+.headerContainer > h4 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.inputSection {
+  padding: 2rem;
+}
+
+.adDetailItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.adDetailItem > p:nth-child(1) {
+  width: 25%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.adDetailItem > div:nth-child(2) {
+  width: 75%;
+}
+
+.dimensionSection > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeSection > div {
+  width: 48%;
+}
+
+.imageUpload {
+  border: 1px solid rgba(126, 139, 182, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15rem;
+  flex-direction: column;
+  border-radius: 2.59px;
+}
+
+.imageUpload > i {
+  font-size: 3rem;
+  cursor: pointer;
+  color: #484747;
+}
+
+.imageUpload > label {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  background: #ffd91b;
+  border-radius: 6px;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.uploadButton {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  background: #ffd91b;
+  border-radius: 6px;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+}
+
+.imageUpload > input {
+  display: none;
+}
+
+.imagesDisplay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.imagesDisplay > div {
+  position: relative;
+}
+
+.imagesDisplay > div > img {
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 2.59px;
+}
+
+.cancelIcon {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  background-color: #484747;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+
+.buttonSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.buttonSection > span {
+  width: 75%;
+}

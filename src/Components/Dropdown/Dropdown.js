@@ -8,7 +8,6 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const Dropdown = (props) => {
   const [isActive, setIsActive] = useState(false);
-  const [setKEyPressedValue] = useState("");
   const [optionsState, setOptionsState] = useState(props.options);
 
   // ref
@@ -33,6 +32,10 @@ const Dropdown = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    setOptionsState(props.options);
+  }, [props.options]);
+
   return (
     <div className={classes.dropdown} ref={dropdownRef}>
       <div
@@ -49,7 +52,6 @@ const Dropdown = (props) => {
         }}
         tabIndex={0}
         onKeyDown={(event) => {
-          setKEyPressedValue(event.key);
           const optionsCopy = props.options.filter((data) => {
             return data.toString().toLowerCase().charAt(0) === event.key;
           });
@@ -59,7 +61,9 @@ const Dropdown = (props) => {
           }
         }}
       >
-        {props.selected || props.title}
+        {props.selected.length > 50
+          ? `${props.selected.slice(0, 50)}....`
+          : props.selected || props.title}
         <i>
           <FontAwesomeIcon
             icon={faAngleDown}

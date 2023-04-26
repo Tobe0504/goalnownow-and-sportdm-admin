@@ -1,6 +1,6 @@
 import Layout from "../../Components/Layout/Layout";
 import classes from "./GoalNowNowAds.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -28,12 +28,19 @@ const GoalNowNowAds = () => {
   // location
   const location = useLocation();
 
+  // navigate
+  const navigate = useNavigate();
+
   return (
     <Layout>
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <h4>GoalNowNow Admin</h4>
-          <button>
+          <button
+            onClick={() => {
+              navigate("/ads/create-new-ad");
+            }}
+          >
             <span>
               <FontAwesomeIcon icon={faPlus} />
             </span>
