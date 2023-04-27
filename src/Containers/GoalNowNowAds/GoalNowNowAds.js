@@ -10,7 +10,7 @@ import { AdContext } from "../../Context/AdContext";
 
 const GoalNowNowAds = () => {
   // Context
-  const { fetchGoalNowNowAds, isSendingRequest, goalNowNowAds } =
+  const { fetchGoalNowNowAds, goalNowNowAds, setGoalNowNowAds } =
     useContext(AdContext);
 
   const navItems = [
@@ -83,7 +83,11 @@ const GoalNowNowAds = () => {
           })}
         </div>
         <div className={classes.goalNowNowAds}>
-          <AdsList list={goalNowNowAds} />
+          <AdsList
+            list={goalNowNowAds}
+            setList={setGoalNowNowAds}
+            fetchFunction={fetchGoalNowNowAds}
+          />
         </div>
       </div>
     </Layout>

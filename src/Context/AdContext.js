@@ -67,7 +67,11 @@ const AdContextProvider = (props) => {
         createAdObject
       )
       .then((res) => {
-        setGoalNowNowAds(res.data.data);
+        setGoalNowNowAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
         console.log(res, "Test");
         setIsSendingRequest(false);
       })
@@ -87,7 +91,11 @@ const AdContextProvider = (props) => {
         createAdObject
       )
       .then((res) => {
-        setSportDmAds(res.data.data);
+        setSportDmAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
         console.log(res, "Test");
         setIsSendingRequest(false);
       })
@@ -99,12 +107,35 @@ const AdContextProvider = (props) => {
 
   // Fetch single Ad
   const fetchSingleAd = (id) => {
+    setSinglyAd([]);
+    setIsSendingRequest(true);
     axios
       .get(
         `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/all?id=${id}`
       )
       .then((res) => {
+        setSinglyAd(res.data.data);
         console.log(res);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Detele single Ad
+  const deteleAd = (id) => {
+    setSinglyAd([]);
+    setIsSendingRequest(true);
+    axios
+      .delete(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/deleteAds?id=${id}`
+      )
+      .then((res) => {
+        console.log(res, "delete ads");
+        setIsSendingRequest(false);
+        fetchGoalNowNowAds();
+        fetchSportDmAds();
       })
       .catch((err) => {
         console.log(err);
@@ -140,9 +171,13 @@ const AdContextProvider = (props) => {
         fetchGoalNowNowAds,
         isSendingRequest,
         goalNowNowAds,
+        setGoalNowNowAds,
         fetchSportDmAds,
         sportDmAds,
+        setSportDmAds,
         fetchSingleAd,
+        singlyAd,
+        deteleAd,
       }}
     >
       {props.children}

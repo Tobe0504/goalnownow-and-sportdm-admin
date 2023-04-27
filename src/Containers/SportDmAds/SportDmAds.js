@@ -10,7 +10,7 @@ import { AdContext } from "../../Context/AdContext";
 
 const SportDmAds = () => {
   // context
-  const { fetchSportDmAds, sportDmAds } = useContext(AdContext);
+  const { fetchSportDmAds, sportDmAds, setSportDmAds } = useContext(AdContext);
 
   const navItems = [
     {
@@ -83,7 +83,11 @@ const SportDmAds = () => {
           })}
         </div>
         <div className={classes.goalNowNowAds}>
-          <AdsList list={sportDmAds} />
+          <AdsList
+            list={sportDmAds}
+            setList={setSportDmAds}
+            fetchFunction={fetchSportDmAds}
+          />
         </div>
       </div>
     </Layout>

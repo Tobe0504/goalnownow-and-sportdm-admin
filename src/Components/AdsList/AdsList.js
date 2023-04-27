@@ -5,13 +5,17 @@ import classes from "./AdsList.module.css";
 import { useContext } from "react";
 import { AdContext } from "../../Context/AdContext";
 import { CircularProgress } from "@mui/material";
+import {
+  activeToggler,
+  activeTogglerAllFalse,
+} from "../../HelperFunctions/ActiveToggler";
 
 const AdsList = (props) => {
   // navigate
   const navigate = useNavigate();
 
   // context
-  const { isSendingRequest } = useContext(AdContext);
+  const { isSendingRequest, deteleAd } = useContext(AdContext);
   return (
     <div className={classes.container}>
       {isSendingRequest && (
@@ -22,6 +26,7 @@ const AdsList = (props) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            padding: "1rem",
           }}
         >
           <CircularProgress
@@ -37,25 +42,58 @@ const AdsList = (props) => {
       ) : (
         props.list.map((item, i) => {
           return (
-            <div className={classes.listItem}>
-              <div className={classes.leftSection}>
-                <div className={classes.adName}>{item.name}</div>
-              </div>
-              <div className={classes.rightSection}>
-                <div className={classes.adDiration}>
-                  {item.duration} days left
+            <div className={classes.listItemOuter}>
+              <div className={classes.listItem}>
+                <div className={classes.leftSection}>
+                  <div className={classes.adName}>{item.name}</div>
                 </div>
-                <div>
-                  <FontAwesomeIcon
-                    icon={faPencil}
+                <div className={classes.rightSection}>
+                  <div className={classes.adDiration}>
+                    {item.duration} days left
+                  </div>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      onClick={() => {
+                        navigate(`/ads/edit-ad/${item.id}`);
+                      }}
+                    />
+                  </div>
+                  <div
                     onClick={() => {
-                      navigate(`/ads/edit-ad/${item.id}`);
+                      activeToggler(i, props.list, props.setList);
+                      console.log(props.list);
                     }}
-                  />
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </div>
                 </div>
-                <div>
-                  <FontAwesomeIcon icon={faTrash} />
-                </div>
+              </div>
+              <div
+                className={classes.deleteOption}
+                style={
+                  item.isActive
+                    ? { maxHeight: "200px" }
+                    : { maxHeight: "0px", visibility: "hidden" }
+                }
+              >
+                <p>Are you sure you want to delete?</p>
+                <button
+                  className={classes.uploadButton}
+                  onClick={() => {
+                    deteleAd(item.id);
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className={classes.uploadButton2}
+                  onClick={() => {
+                    activeTogglerAllFalse(i, props.list, props.setList);
+                  }}
+                >
+                  No
+                </button>
               </div>
             </div>
           );
