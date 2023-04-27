@@ -12,6 +12,7 @@ import EditAd from "./Containers/EditAd/EditAd";
 import Login from "./Containers/Login/Login";
 import Restricted from "./Components/Restricted/Restricted";
 import SinglyAdContainer from "./Containers/SinglyAdContainer/SinglyAdContainer";
+import SignUp from "./Containers/SignUp/SignUp";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
     </Router>
   );

@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { CircularProgress, Alert, Snackbar } from "@mui/material";
 import Input from "../../Components/Input/Input";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // Context
@@ -11,19 +12,18 @@ const Login = () => {
     setAdminEmail,
     adminPassword,
     setAdminPassword,
-    newAdminPassword,
-    setNewAdminPassword,
-    adminName,
-    setAdminName,
-    register,
     isSendingRequest,
     alert,
     setAlert,
     login,
+    registerAdminPassword,
+    setRegisterAdminPassword,
   } = useContext(AuthContext);
 
   // State
   const [newUser, setNewUser] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className={classes.innerContainer1}>
@@ -49,53 +49,16 @@ const Login = () => {
           {newUser ? (
             <form>
               <div>
-                <label htmlFor="fullName">Admin Name</label>
+                <label htmlFor="registeradminpassword">
+                  Input Register Admin Password
+                </label>
                 <Input
                   type="text"
-                  id="name"
-                  placeholder="Enter your name"
-                  value={adminName}
+                  id="registeradminpassword"
+                  placeholder="Enter Register Admin Password"
+                  value={registerAdminPassword}
                   onChange={(e) => {
-                    setAdminName(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="fullName">Admin Email</label>
-                <Input
-                  type="text"
-                  id="email"
-                  placeholder="Enter your email address"
-                  value={adminEmail}
-                  onChange={(e) => {
-                    setAdminEmail(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password">Admin Password</label>
-                <Input
-                  type="text"
-                  id="password"
-                  placeholder="Enter a password"
-                  value={adminPassword}
-                  onChange={(e) => {
-                    setAdminPassword(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="newpassword">Confirm Admin Password</label>
-                <Input
-                  type="text"
-                  id="newpassword"
-                  placeholder="Enter a password"
-                  value={newAdminPassword}
-                  onChange={(e) => {
-                    setNewAdminPassword(e.target.value);
+                    setRegisterAdminPassword(e.target.value);
                   }}
                 />
               </div>
@@ -103,20 +66,24 @@ const Login = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    register();
+
+                    if (
+                      registerAdminPassword ===
+                      process.env.REACT_APP_REGISTER_ADMIN_PIN
+                    ) {
+                      navigate("/sign-up");
+                    }
                   }}
                 >
-                  {isSendingRequest ? (
-                    <CircularProgress size={"1rem"} color="inherit" />
-                  ) : (
-                    "Register Admin"
-                  )}
+                  Check Register Admin Password
                 </button>
               </div>
+
               <span
                 className={classes.newPasswordSetupAlready}
                 onClick={() => {
                   setNewUser(false);
+                  console.log("Hmmm");
                 }}
               >
                 Not a new admin?

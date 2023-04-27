@@ -11,6 +11,7 @@ const AuthContextProvider = (props) => {
   const [adminName, setAdminName] = useState("");
   const [isSendingRequest, setIsSendingRequest] = useState(false);
   const [alert, setAlert] = useState("");
+  const [registerAdminPassword, setRegisterAdminPassword] = useState("");
 
   const registerObject = {
     name: adminName,
@@ -91,6 +92,8 @@ const AuthContextProvider = (props) => {
         setAlert,
         login,
         userToken,
+        registerAdminPassword,
+        setRegisterAdminPassword,
       }}
     >
       {props.children}
