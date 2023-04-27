@@ -35,7 +35,7 @@ const Login = () => {
           {newUser ? (
             <form>
               <div>
-                <label htmlFor="fullName">Cloudpact Email</label>
+                <label htmlFor="fullName">Admin Email</label>
                 <Input
                   type="text"
                   id="email"
@@ -48,7 +48,7 @@ const Login = () => {
               </div>
 
               <div>
-                <label htmlFor="password">Cloudpact Admin Password</label>
+                <label htmlFor="password">Admin Password</label>
                 <Input
                   type="text"
                   id="password"
@@ -61,7 +61,7 @@ const Login = () => {
               </div>
 
               <div>
-                <label htmlFor="newpassword">New Admin Password</label>
+                <label htmlFor="newpassword">Admin Password</label>
                 <Input
                   type="text"
                   id="newpassword"

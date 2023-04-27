@@ -61,9 +61,9 @@ const Dropdown = (props) => {
           }
         }}
       >
-        {props.selected.length > 50
-          ? `${props.selected.slice(0, 50)}....`
-          : props.selected || props.title}
+        {props?.selected?.length > 50
+          ? `${props?.selected?.slice(0, 50)}....`
+          : props?.selected || props.title}
         <i>
           <FontAwesomeIcon
             icon={faAngleDown}
@@ -74,8 +74,8 @@ const Dropdown = (props) => {
       </div>
       {isActive && (
         <div className={classes.dropdownContent} onClick={props.onClick}>
-          {optionsState.length >= 1 ? (
-            optionsState.map((option) => {
+          {optionsState?.length >= 1 ? (
+            optionsState?.map((option) => {
               return (
                 <div
                   key={v4()}

@@ -7,11 +7,17 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AdsList from "../../Components/AdsList/AdsList";
 import { useContext, useEffect } from "react";
 import { AdContext } from "../../Context/AdContext";
+import { Alert, Snackbar } from "@mui/material";
 
 const GoalNowNowAds = () => {
   // Context
-  const { fetchGoalNowNowAds, goalNowNowAds, setGoalNowNowAds } =
-    useContext(AdContext);
+  const {
+    fetchGoalNowNowAds,
+    goalNowNowAds,
+    setGoalNowNowAds,
+    alert,
+    setAlert,
+  } = useContext(AdContext);
 
   const navItems = [
     {
@@ -44,6 +50,19 @@ const GoalNowNowAds = () => {
 
   return (
     <Layout>
+      {alert && (
+        <Snackbar
+          open={Boolean(alert)}
+          autoHideDuration={6000}
+          onClose={() => {
+            setAlert();
+          }}
+        >
+          <Alert severity={alert} variant="outlined">
+            Ad deleted successfully!
+          </Alert>
+        </Snackbar>
+      )}
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <h4>GoalNowNow Admin</h4>

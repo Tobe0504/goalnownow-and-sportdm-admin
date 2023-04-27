@@ -20,6 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
 
 const CreateAd = () => {
   // States
@@ -48,6 +49,9 @@ const CreateAd = () => {
     setSection,
     page,
     setPage,
+    alert,
+    setAlert,
+    isSendingRequest,
   } = useContext(AdContext);
 
   const imageHandler = (e) => {
@@ -122,6 +126,19 @@ const CreateAd = () => {
 
   return (
     <Layout>
+      {alert && (
+        <Snackbar
+          open={Boolean(alert)}
+          autoHideDuration={6000}
+          onClose={() => {
+            setAlert();
+          }}
+        >
+          <Alert severity={alert} variant="outlined">
+            Ad uploaded successfully!
+          </Alert>
+        </Snackbar>
+      )}
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <span
@@ -298,7 +315,7 @@ const CreateAd = () => {
             </div>
           )}
 
-          {/* {width &&
+          {width &&
             height &&
             duration &&
             country &&
@@ -307,15 +324,23 @@ const CreateAd = () => {
             section &&
             redirectURl &&
             adImage.length > 0 &&
-            name && ( */}
-          <div className={classes.buttonSection}>
-            <span>
-              <button className={classes.uploadButton} onClick={createAd}>
-                Create Ad
-              </button>
-            </span>
-          </div>
-          {/* )} */}
+            name && (
+              <div className={classes.buttonSection}>
+                <span>
+                  <button className={classes.uploadButton} onClick={createAd}>
+                    {isSendingRequest ? (
+                      <CircularProgress
+                        size="1rem"
+                        color="inherit"
+                        style={{ color: "#000000" }}
+                      />
+                    ) : (
+                      "Create Ad"
+                    )}
+                  </button>
+                </span>
+              </div>
+            )}
         </div>
       </div>
     </Layout>

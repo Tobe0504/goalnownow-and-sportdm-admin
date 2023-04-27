@@ -7,10 +7,12 @@ import Layout from "../../Components/Layout/Layout";
 import AdsList from "../../Components/AdsList/AdsList";
 import { useContext, useEffect } from "react";
 import { AdContext } from "../../Context/AdContext";
+import { Alert, Snackbar } from "@mui/material";
 
 const SportDmAds = () => {
   // context
-  const { fetchSportDmAds, sportDmAds, setSportDmAds } = useContext(AdContext);
+  const { fetchSportDmAds, sportDmAds, setSportDmAds, alert, setAlert } =
+    useContext(AdContext);
 
   const navItems = [
     {
@@ -44,6 +46,19 @@ const SportDmAds = () => {
 
   return (
     <Layout>
+      {alert && (
+        <Snackbar
+          open={Boolean(alert)}
+          autoHideDuration={6000}
+          onClose={() => {
+            setAlert();
+          }}
+        >
+          <Alert severity={alert} variant="outlined">
+            Ad deleted successfully!
+          </Alert>
+        </Snackbar>
+      )}
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <h4>SportDm Admin</h4>
