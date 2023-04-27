@@ -5,8 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../../Components/Layout/Layout";
 import AdsList from "../../Components/AdsList/AdsList";
+import { useContext, useEffect } from "react";
+import { AdContext } from "../../Context/AdContext";
 
 const SportDmAds = () => {
+  // context
+  const { fetchSportDmAds, sportDmAds } = useContext(AdContext);
+
   const navItems = [
     {
       title: "GoalNowNow",
@@ -31,6 +36,11 @@ const SportDmAds = () => {
 
   // navigate
   const navigate = useNavigate();
+
+  // Effects
+  useEffect(() => {
+    fetchSportDmAds();
+  }, []);
 
   return (
     <Layout>
@@ -73,7 +83,7 @@ const SportDmAds = () => {
           })}
         </div>
         <div className={classes.goalNowNowAds}>
-          <AdsList list={adsList} />
+          <AdsList list={sportDmAds} />
         </div>
       </div>
     </Layout>

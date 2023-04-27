@@ -67,7 +67,7 @@ const CreateAd = () => {
         images.map((data) => {
           return { image: data, id: v4() };
         })
-      ); // set adImage to an array of images
+      );
     });
   };
 
@@ -236,7 +236,7 @@ const CreateAd = () => {
                 type="number"
                 value={duration}
                 onChange={(e) => {
-                  setDuration(e.target.value);
+                  setDuration(Number(e.target.value));
                 }}
               />
             </div>

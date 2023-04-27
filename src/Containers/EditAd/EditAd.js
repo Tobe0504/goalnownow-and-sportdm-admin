@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../Components/Layout/Layout";
 import classes from "./EditAd.module.css";
 import { AdContext } from "../../Context/AdContext";
@@ -23,7 +23,16 @@ import {
 import { v4 } from "uuid";
 
 const EditAd = () => {
-  //   const { adId } = useParams();
+  // ontext
+  const { fetchSingleAd } = useContext(AdContext);
+
+  //   Params
+  const { adId } = useParams();
+
+  // Effects
+  useEffect(() => {
+    fetchSingleAd(adId);
+  });
 
   // navigate
   const navigate = useNavigate();

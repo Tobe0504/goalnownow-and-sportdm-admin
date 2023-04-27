@@ -5,8 +5,14 @@ import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AdsList from "../../Components/AdsList/AdsList";
+import { useContext, useEffect } from "react";
+import { AdContext } from "../../Context/AdContext";
 
 const GoalNowNowAds = () => {
+  // Context
+  const { fetchGoalNowNowAds, isSendingRequest, goalNowNowAds } =
+    useContext(AdContext);
+
   const navItems = [
     {
       title: "GoalNowNow",
@@ -30,6 +36,11 @@ const GoalNowNowAds = () => {
 
   // navigate
   const navigate = useNavigate();
+
+  // Effects
+  useEffect(() => {
+    fetchGoalNowNowAds();
+  }, []);
 
   return (
     <Layout>
@@ -72,7 +83,7 @@ const GoalNowNowAds = () => {
           })}
         </div>
         <div className={classes.goalNowNowAds}>
-          <AdsList list={adsList} />
+          <AdsList list={goalNowNowAds} />
         </div>
       </div>
     </Layout>
