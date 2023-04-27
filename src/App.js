@@ -11,6 +11,7 @@ import CreateAd from "./Containers/CreateAd/CreateAd";
 import EditAd from "./Containers/EditAd/EditAd";
 import Login from "./Containers/Login/Login";
 import Restricted from "./Components/Restricted/Restricted";
+import SinglyAdContainer from "./Containers/SinglyAdContainer/SinglyAdContainer";
 
 function App() {
   return (
@@ -53,6 +54,15 @@ function App() {
           element={
             <Restricted>
               <EditAd />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="/ad-info/:adId"
+          element={
+            <Restricted>
+              <SinglyAdContainer />
             </Restricted>
           }
         />

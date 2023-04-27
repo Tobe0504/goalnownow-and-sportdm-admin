@@ -42,7 +42,12 @@ const AdsList = (props) => {
       ) : (
         props.list.map((item, i) => {
           return (
-            <div className={classes.listItemOuter}>
+            <div
+              className={classes.listItemOuter}
+              onClick={() => {
+                navigate(`/ad-info/${item.id}`);
+              }}
+            >
               <div className={classes.listItem}>
                 <div className={classes.leftSection}>
                   <div className={classes.adName}>{item.name}</div>

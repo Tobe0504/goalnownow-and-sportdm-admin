@@ -143,6 +143,7 @@ const AdContextProvider = (props) => {
         setRedirectUrl(res.data.data[0].redirect_url);
         setname(res.data.data[0].name);
         setAdImage([{ image: res.data.data[0].media_url }]);
+        setSinglyAd(res.data.data[0]);
       })
       .catch((err) => {
         console.log(err);
