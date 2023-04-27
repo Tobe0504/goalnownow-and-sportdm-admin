@@ -32,11 +32,6 @@ const GoalNowNowAds = () => {
     },
   ];
 
-  const adsList = [
-    { name: "CocaCola", duration: "2 days left" },
-    { name: "Wema Bank", duration: "2 days left" },
-    { name: "University of Lagos", duration: "2 days left" },
-  ];
   // location
   const location = useLocation();
 
@@ -46,6 +41,8 @@ const GoalNowNowAds = () => {
   // Effects
   useEffect(() => {
     fetchGoalNowNowAds();
+
+    // eslint-disable-next-line
   }, []);
 
   return (

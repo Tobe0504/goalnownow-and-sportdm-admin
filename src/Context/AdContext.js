@@ -21,18 +21,8 @@ const AdContextProvider = (props) => {
   const [singlyAd, setSinglyAd] = useState();
   const [alert, setAlert] = useState("");
 
-  // Update / Edit ads states
-  const [newName, setNewName] = useState("");
-  const [newCountry, setNewCountry] = useState("");
-  const [newExpiryDate, setNewExpiryDate] = useState("");
-  const [newHeight, setNewHeight] = useState("");
-  const [newWidth, setNewWidth] = useState("");
-  const [newPlatform, setNewPlatform] = useState("");
-  const [newRedirectURl, setNewRedirectUrl] = useState("");
-  const [newAdImage, setNewAdImage] = useState([]);
-  const [newDuration, setNewDuration] = useState();
-  const [newSection, setNewSection] = useState("");
-  const [newPage, setNewPage] = useState("");
+  // user token
+  const adminUserToken = localStorage.getItem("gnn_and_sport_admin_user_token");
 
   const createAdObject = {
     width,
@@ -45,20 +35,6 @@ const AdContextProvider = (props) => {
     redirect_url: redirectURl,
     media: adImage[0]?.image,
     name,
-    mediaType: "picture",
-  };
-
-  const updatedAdObject = {
-    width: newWidth,
-    height: newHeight,
-    duration: newDuration,
-    country: newCountry,
-    platform: newPlatform,
-    page: newPage,
-    section: newSection,
-    redirect_url: newRedirectURl,
-    media: newAdImage[0]?.image,
-    name: newName,
     mediaType: "picture",
   };
 
@@ -197,16 +173,21 @@ const AdContextProvider = (props) => {
   };
 
   const editAd = (id) => {
+    setIsSendingRequest(true);
     axios
       .post(
         `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/updateAds/${id}`,
-        createAdObject
+        createAdObject,
+        { headers: { Authorization: `Bearer ${adminUserToken}` } }
       )
       .then((res) => {
         console.log(res, "Edit ads");
+        setIsSendingRequest(false);
+        setAlert(res.data.message);
       })
       .catch((err) => {
         console.log(err, "edit ads");
+        setIsSendingRequest(false);
       });
   };
 
@@ -249,8 +230,6 @@ const AdContextProvider = (props) => {
         deteleAd,
         alert,
         setAlert,
-        setNewName,
-        setNewCountry,
         editAd,
       }}
     >

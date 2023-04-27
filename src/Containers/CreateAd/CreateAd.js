@@ -100,6 +100,21 @@ const CreateAd = () => {
     // eslint-disable-next-line
   }, [platform]);
 
+  useEffect(() => {
+    setWidth("");
+    setHeight("");
+    setDuration("");
+    setCountry("");
+    setPlatform("");
+    setPage("");
+    setSection("");
+    setRedirectUrl("");
+    setname("");
+    setAdImage([]);
+
+    // eslint-disable-next-line
+  }, []);
+
   const [sectionArray, setSectionArray] = useState([]);
 
   useEffect(() => {

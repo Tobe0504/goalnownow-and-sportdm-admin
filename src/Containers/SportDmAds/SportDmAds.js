@@ -27,12 +27,6 @@ const SportDmAds = () => {
     },
   ];
 
-  const adsList = [
-    { name: "Budweiser", duration: "2 days left" },
-    { name: "UBA", duration: "2 days left" },
-    { name: "Milo", duration: "2 days left" },
-  ];
-
   // location
   const location = useLocation();
 
@@ -42,6 +36,8 @@ const SportDmAds = () => {
   // Effects
   useEffect(() => {
     fetchSportDmAds();
+
+    // eslint-disable-next-line
   }, []);
 
   return (

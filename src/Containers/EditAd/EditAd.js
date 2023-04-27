@@ -21,12 +21,11 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Alert, Snackbar } from "@mui/material";
 
 const EditAd = () => {
   // ontext
-  const { fetchSingleAd, singlyAd, isSendingRequest, setSinglyAd } =
-    useContext(AdContext);
+  const { fetchSingleAd, isSendingRequest } = useContext(AdContext);
 
   //   Params
   const { adId } = useParams();
@@ -34,6 +33,8 @@ const EditAd = () => {
   // Effects
   useEffect(() => {
     fetchSingleAd(adId);
+
+    // eslint-disable-next-line
   }, []);
 
   // navigate
@@ -58,7 +59,6 @@ const EditAd = () => {
     setRedirectUrl,
     adImage,
     setAdImage,
-    createAd,
     duration,
     setDuration,
     section,
@@ -66,6 +66,8 @@ const EditAd = () => {
     page,
     setPage,
     editAd,
+    alert,
+    setAlert,
   } = useContext(AdContext);
 
   const imageHandler = (e) => {
@@ -154,6 +156,20 @@ const EditAd = () => {
             style={{ color: "#ffd91b" }}
           />
         </div>
+      )}
+
+      {alert && (
+        <Snackbar
+          open={Boolean(alert)}
+          autoHideDuration={6000}
+          onClose={() => {
+            setAlert();
+          }}
+        >
+          <Alert severity={alert} variant="outlined">
+            Ad updated successfully!
+          </Alert>
+        </Snackbar>
       )}
 
       <div className={classes.container}>

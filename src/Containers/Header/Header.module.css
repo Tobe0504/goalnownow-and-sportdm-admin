@@ -112,6 +112,22 @@
   width: 148px;
 }
 
+.logoutButton {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  background: #ffd91b;
+  border-radius: 6px;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
 .activeNav {
   color: #ffd91b;
 }

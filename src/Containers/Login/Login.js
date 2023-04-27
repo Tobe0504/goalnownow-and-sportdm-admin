@@ -1,7 +1,7 @@
 import classes from "./Login.module.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Alert, Snackbar } from "@mui/material";
 import Input from "../../Components/Input/Input";
 
 const Login = () => {
@@ -13,6 +13,13 @@ const Login = () => {
     setAdminPassword,
     newAdminPassword,
     setNewAdminPassword,
+    adminName,
+    setAdminName,
+    register,
+    isSendingRequest,
+    alert,
+    setAlert,
+    login,
   } = useContext(AuthContext);
 
   // State
@@ -23,17 +30,37 @@ const Login = () => {
       <div className={classes.innerContainer2Outer}>
         <div className={classes.innerContainer2}>
           <div className={classes.alert}>
-            {/* {error && <Alert severity="error">{error}</Alert>} */}
-            {/* {userIsLoggedIn && (
-              <Alert severity="success">
-                This user is logged in. Please log out of other account to login
-              </Alert>
-            )} */}
+            {alert && (
+              <Snackbar
+                open={Boolean(alert)}
+                autoHideDuration={6000}
+                onClose={() => {
+                  setAlert();
+                }}
+              >
+                <Alert severity="success" variant="outlined">
+                  {alert}
+                </Alert>
+              </Snackbar>
+            )}
           </div>
           <div className={classes.header}>Admin Login</div>
 
           {newUser ? (
             <form>
+              <div>
+                <label htmlFor="fullName">Admin Name</label>
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your name"
+                  value={adminName}
+                  onChange={(e) => {
+                    setAdminName(e.target.value);
+                  }}
+                />
+              </div>
+
               <div>
                 <label htmlFor="fullName">Admin Email</label>
                 <Input
@@ -61,7 +88,7 @@ const Login = () => {
               </div>
 
               <div>
-                <label htmlFor="newpassword">Admin Password</label>
+                <label htmlFor="newpassword">Confirm Admin Password</label>
                 <Input
                   type="text"
                   id="newpassword"
@@ -75,16 +102,15 @@ const Login = () => {
               <div className={classes.buttonSection}>
                 <button
                   onClick={(e) => {
-                    // userLoginHandler();
-                    // e.preventDefault();
-                    // loginHandler();
+                    e.preventDefault();
+                    register();
                   }}
                 >
-                  {/* {isSendingRequest ? ( */}
-                  <CircularProgress size={"1rem"} color="inherit" />
-                  {/* ) : ( */}
-                  {/* "Login" */}
-                  {/* )} */}
+                  {isSendingRequest ? (
+                    <CircularProgress size={"1rem"} color="inherit" />
+                  ) : (
+                    "Register Admin"
+                  )}
                 </button>
               </div>
               <span
@@ -128,14 +154,14 @@ const Login = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    // loginHandler();
+                    login();
                   }}
                 >
-                  {/* {isSendingRequest ? ( */}
-                  <CircularProgress size={"1rem"} color="inherit" />
-                  {/* ) : ( */}
-                  {/* "Login" */}
-                  {/* )} */}
+                  {isSendingRequest ? (
+                    <CircularProgress size={"1rem"} color="inherit" />
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
               <span
