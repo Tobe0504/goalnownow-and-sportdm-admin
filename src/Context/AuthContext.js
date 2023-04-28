@@ -48,13 +48,20 @@ const AuthContextProvider = (props) => {
           "gnn_and_sport_admin_user_token",
           res.data.access_token
         );
-        window.location.href = "/#/";
+        if (process.env.NODE_ENV === "development") {
+          window.location.href = "/";
+        } else {
+          window.location.href = "/goalnownow-and-sportdm-admin/";
+        }
+        console.log(process.env);
       })
       .catch((err) => {
         console.log(err);
         setIsSendingRequest(false);
       });
   };
+
+  console.log(process.env);
 
   const register = () => {
     setIsSendingRequest(true);
