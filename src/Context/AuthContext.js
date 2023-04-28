@@ -48,7 +48,7 @@ const AuthContextProvider = (props) => {
           "gnn_and_sport_admin_user_token",
           res.data.access_token
         );
-        window.location.href = "/";
+        window.location.href = "/#/";
       })
       .catch((err) => {
         console.log(err);
