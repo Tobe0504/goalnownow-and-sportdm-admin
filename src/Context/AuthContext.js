@@ -61,8 +61,6 @@ const AuthContextProvider = (props) => {
       });
   };
 
-  console.log(process.env);
-
   const register = () => {
     setIsSendingRequest(true);
     axios

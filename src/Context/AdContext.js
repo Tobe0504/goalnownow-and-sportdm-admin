@@ -177,6 +177,7 @@ const AdContextProvider = (props) => {
       .then((res) => {
         setIsSendingRequest(false);
         setAlert(res.data.message);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err, "edit ads");

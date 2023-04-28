@@ -92,7 +92,7 @@ const Login = () => {
           ) : (
             <form>
               <div>
-                <label htmlFor="email">Cloudpact Email</label>
+                <label htmlFor="email">Admin Email</label>
                 <Input
                   type="text"
                   id="email"

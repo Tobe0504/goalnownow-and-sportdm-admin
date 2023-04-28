@@ -42,14 +42,14 @@ const AdsList = (props) => {
       ) : (
         props.list.map((item, i) => {
           return (
-            <div
-              className={classes.listItemOuter}
-              onClick={() => {
-                navigate(`/ad-info/${item.id}`);
-              }}
-            >
+            <div className={classes.listItemOuter} key={i}>
               <div className={classes.listItem}>
-                <div className={classes.leftSection}>
+                <div
+                  className={classes.leftSection}
+                  onClick={() => {
+                    navigate(`/ad-info/${item.id}`);
+                  }}
+                >
                   <div className={classes.adName}>{item.name}</div>
                 </div>
                 <div className={classes.rightSection}>
@@ -67,7 +67,6 @@ const AdsList = (props) => {
                   <div
                     onClick={() => {
                       activeToggler(i, props.list, props.setList);
-                      console.log(props.list);
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} />

@@ -186,7 +186,7 @@ const EditAd = () => {
               navigate(-1);
             }}
           >
-            Create Ad
+            {name}
           </h4>
         </div>
 

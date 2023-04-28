@@ -1,6 +1,6 @@
 .listItemOuter {
   background: var(--foregroundBlack);
-  padding: 0.75rem 1rem;
+  padding: 0 1rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
 }
@@ -13,6 +13,11 @@
   align-items: center;
   gap: 24px;
   justify-content: space-between;
+}
+
+.leftSection {
+  width: 85%;
+  padding: 0.75rem 0;
 }
 
 .adName {
@@ -29,6 +34,7 @@
   font-size: 12px;
   line-height: 18px;
   animation: appear 0.3s ease-in-out;
+  padding: 0.75rem 0;
 }
 
 .rightSection > div:nth-child(2),
