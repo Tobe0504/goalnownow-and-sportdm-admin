@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 const LeftNavSection = () => {
   return (
     <div className={classes.container}>
-      {navItems.map((item) => {
+      {navItems.map((item, i) => {
         return (
-          <Link to={item.route} className={classes.navItem}>
+          <Link to={item.route} className={classes.navItem} key={i}>
             <div>{item.icon}</div>
             <div>{item.title}</div>
           </Link>

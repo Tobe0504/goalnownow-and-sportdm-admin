@@ -89,4 +89,6 @@ export const durationArray = [
   "One year",
 ];
 
+export const mediaTypes = ["Picture", "Gif"];
+
 export const platforms = ["GoalNowNow", "SportDm"];

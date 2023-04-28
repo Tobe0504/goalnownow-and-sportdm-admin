@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AdContext = createContext();
 
@@ -12,7 +12,8 @@ const AdContextProvider = (props) => {
   const [platform, setPlatform] = useState("");
   const [redirectURl, setRedirectUrl] = useState("");
   const [adImage, setAdImage] = useState([]);
-  const [duration, setDuration] = useState();
+  const [duration, setDuration] = useState(0);
+  const [mediaType, setMediaType] = useState("");
   const [section, setSection] = useState("");
   const [page, setPage] = useState("");
   const [isSendingRequest, setIsSendingRequest] = useState(false);
@@ -20,6 +21,7 @@ const AdContextProvider = (props) => {
   const [sportDmAds, setSportDmAds] = useState([]);
   const [singlyAd, setSinglyAd] = useState();
   const [alert, setAlert] = useState("");
+  const [createError, setCreateError] = useState([]);
 
   // user token
   const adminUserToken = localStorage.getItem("gnn_and_sport_admin_user_token");
@@ -30,15 +32,13 @@ const AdContextProvider = (props) => {
     duration,
     country,
     platform,
-    page,
-    section,
+    page: page?.replaceAll(" ", "-"),
+    section: section?.replaceAll(" ", "-"),
     redirect_url: redirectURl,
     media: adImage[0]?.image,
     name,
-    mediaType: "picture",
+    mediaType,
   };
-
-  console.log(createAdObject, "Ad ibject");
 
   //   Fetch functions
 
@@ -51,7 +51,6 @@ const AdContextProvider = (props) => {
         createAdObject
       )
       .then((res) => {
-        console.log(res, "Test");
         setIsSendingRequest(false);
         setAlert(res.data.message);
         setWidth("");
@@ -68,6 +67,8 @@ const AdContextProvider = (props) => {
       .catch((err) => {
         console.log(err, "Test err");
         setIsSendingRequest(false);
+        setCreateError(Object.values(err.response.data).flat());
+        console.log(Object.values(err.response.data).flat());
       });
   };
 
@@ -86,7 +87,6 @@ const AdContextProvider = (props) => {
             return { ...data, isActive: false };
           })
         );
-        console.log(res, "Test");
         setIsSendingRequest(false);
       })
       .catch((err) => {
@@ -111,7 +111,6 @@ const AdContextProvider = (props) => {
             return { ...data, isActive: false };
           })
         );
-        console.log(res, "Test");
         setIsSendingRequest(false);
       })
       .catch((err) => {
@@ -130,7 +129,6 @@ const AdContextProvider = (props) => {
       )
       .then((res) => {
         // setSinglyAd(res.data.data[0]);
-        console.log(res);
         setIsSendingRequest(false);
 
         setWidth(res.data.data[0].width);
@@ -150,10 +148,6 @@ const AdContextProvider = (props) => {
       });
   };
 
-  useEffect(() => {
-    console.log(singlyAd, "Singli Ad");
-  }, [singlyAd]);
-
   // Detele single Ad
   const deteleAd = (id) => {
     setIsSendingRequest(true);
@@ -162,7 +156,6 @@ const AdContextProvider = (props) => {
         `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/deleteAds?id=${id}`
       )
       .then((res) => {
-        console.log(res, "delete ads");
         setIsSendingRequest(false);
         fetchGoalNowNowAds();
         fetchSportDmAds();
@@ -182,7 +175,6 @@ const AdContextProvider = (props) => {
         { headers: { Authorization: `Bearer ${adminUserToken}` } }
       )
       .then((res) => {
-        console.log(res, "Edit ads");
         setIsSendingRequest(false);
         setAlert(res.data.message);
       })
@@ -232,6 +224,10 @@ const AdContextProvider = (props) => {
         alert,
         setAlert,
         editAd,
+        mediaType,
+        setMediaType,
+        createError,
+        setCreateError,
       }}
     >
       {props.children}

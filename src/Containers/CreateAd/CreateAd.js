@@ -6,6 +6,7 @@ import {
   countries,
   goalNowNowPagesAndSections,
   heights,
+  mediaTypes,
   platforms,
   sportDmAdPagesAndSections,
   widths,
@@ -21,6 +22,7 @@ import {
 import { v4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Alert, CircularProgress, Snackbar } from "@mui/material";
+// import Alert from "react-bootstrap/Alert";
 
 const CreateAd = () => {
   // States
@@ -52,6 +54,9 @@ const CreateAd = () => {
     alert,
     setAlert,
     isSendingRequest,
+    mediaType,
+    setMediaType,
+    createError,
   } = useContext(AdContext);
 
   const imageHandler = (e) => {
@@ -111,6 +116,7 @@ const CreateAd = () => {
     setRedirectUrl("");
     setname("");
     setAdImage([]);
+    setMediaType("");
 
     // eslint-disable-next-line
   }, []);
@@ -130,8 +136,6 @@ const CreateAd = () => {
           return data.name === page;
         })?.sections
       );
-
-    console.log(sectionArray, "section array");
 
     // eslint-disable-next-line
   }, [page]);
@@ -154,6 +158,16 @@ const CreateAd = () => {
           </Alert>
         </Snackbar>
       )}
+      {createError.length > 0 &&
+        createError.map((data, i) => {
+          return (
+            <div style={{ marginTop: "1rem" }}>
+              <Alert severity="error" variant="outlined">
+                {data}
+              </Alert>
+            </div>
+          );
+        })}
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <span
@@ -305,6 +319,17 @@ const CreateAd = () => {
               />
             </div>
           </div>
+          <div className={classes.adDetailItem}>
+            <p>Media type</p>
+            <div>
+              <Dropdown
+                title="Media type"
+                selected={mediaType}
+                setSelected={setMediaType}
+                options={mediaTypes}
+              />
+            </div>
+          </div>
 
           {adImage.length > 0 && (
             <div className={classes.adDetailItem}>
@@ -313,7 +338,7 @@ const CreateAd = () => {
                 {adImage.length > 0 &&
                   adImage.map((data, i) => {
                     return (
-                      <div>
+                      <div key={i}>
                         <img src={data.image} alt="Ad" key={data.id} />
                         <div
                           className={classes.cancelIcon}
@@ -330,32 +355,21 @@ const CreateAd = () => {
             </div>
           )}
 
-          {width &&
-            height &&
-            duration &&
-            country &&
-            platform &&
-            page &&
-            section &&
-            redirectURl &&
-            adImage.length > 0 &&
-            name && (
-              <div className={classes.buttonSection}>
-                <span>
-                  <button className={classes.uploadButton} onClick={createAd}>
-                    {isSendingRequest ? (
-                      <CircularProgress
-                        size="1rem"
-                        color="inherit"
-                        style={{ color: "#000000" }}
-                      />
-                    ) : (
-                      "Create Ad"
-                    )}
-                  </button>
-                </span>
-              </div>
-            )}
+          <div className={classes.buttonSection}>
+            <span>
+              <button className={classes.uploadButton} onClick={createAd}>
+                {isSendingRequest ? (
+                  <CircularProgress
+                    size="1rem"
+                    color="inherit"
+                    style={{ color: "#000000" }}
+                  />
+                ) : (
+                  "Create Ad"
+                )}
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </Layout>
