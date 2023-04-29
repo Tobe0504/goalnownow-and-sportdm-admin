@@ -213,30 +213,6 @@ const CreateAd = () => {
             </div>
           </div>
 
-          <div
-            className={`${classes.adDetailItem} ${classes.dimensionSection}`}
-          >
-            <p>Dimensions:</p>
-            <div className={classes.timeSection}>
-              <div>
-                <Dropdown
-                  title="Width"
-                  selected={width}
-                  setSelected={setWidth}
-                  options={widths}
-                />
-              </div>
-              <div>
-                <Dropdown
-                  title="Height"
-                  selected={height}
-                  setSelected={setHeight}
-                  options={heights}
-                />
-              </div>
-            </div>
-          </div>
-
           <div className={classes.adDetailItem}>
             <p>Platform</p>
             <div>
@@ -269,6 +245,30 @@ const CreateAd = () => {
                   selected={section}
                   setSelected={setSection}
                   options={sectionArray}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`${classes.adDetailItem} ${classes.dimensionSection}`}
+          >
+            <p>Dimensions:</p>
+            <div className={classes.timeSection}>
+              <div>
+                <Dropdown
+                  title="Width"
+                  selected={width}
+                  setSelected={setWidth}
+                  options={widths}
+                />
+              </div>
+              <div>
+                <Dropdown
+                  title="Height"
+                  selected={height}
+                  setSelected={setHeight}
+                  options={heights}
                 />
               </div>
             </div>

@@ -60,6 +60,7 @@ export const sportDmAdPagesAndSections = [
       "300px by 250px live score section ad 1",
       "300px by 250px live score section ad 2",
       "160px by 600px by the transfer news section",
+      "160px by 600px by the champions league news section",
     ],
   },
 
