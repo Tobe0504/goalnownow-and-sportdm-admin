@@ -13,6 +13,7 @@ import Login from "./Containers/Login/Login";
 import Restricted from "./Components/Restricted/Restricted";
 import SinglyAdContainer from "./Containers/SinglyAdContainer/SinglyAdContainer";
 import SignUp from "./Containers/SignUp/SignUp";
+import SportDmNewsContainer from "./Containers/SportDmNewsContainer/SportDmNewsContainer";
 
 function App() {
   return (
@@ -69,6 +70,10 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/sportdm-news/all-headlines"
+          element={<SportDmNewsContainer />}
+        />
       </Routes>
     </Router>
   );

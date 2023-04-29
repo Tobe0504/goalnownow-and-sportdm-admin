@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faRectangleAd } from "@fortawesome/free-solid-svg-icons";
+import { faNewspaper, faRectangleAd } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
 
 export const navItems = [
@@ -11,6 +11,13 @@ export const navItems = [
     icon: <FontAwesomeIcon icon={faRectangleAd} />,
     isActive: false,
     route: "/ads/goalnownow",
+  },
+  {
+    id: v4(),
+    title: "SportDm News",
+    icon: <FontAwesomeIcon icon={faNewspaper} />,
+    isActive: false,
+    route: "/sportdm-news/all-headlines",
   },
 ];
 
