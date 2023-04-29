@@ -1,6 +1,7 @@
 import classes from "./SportDmNewsContainer.module.css";
 import Layout from "../Layout/Layout";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const SportDmNewsContainer = (props) => {
   // Utils
@@ -40,13 +41,34 @@ const SportDmNewsContainer = (props) => {
   // location
   const location = useLocation();
 
+  // Refs
+  const containerRef = useRef(null);
+
+  // Effects
+  useEffect(() => {
+    const acTiveScorePageMatchNavItem = navItems?.find((navItem) => {
+      return navItem?.route === location?.pathname;
+    });
+
+    const activeDateElement = containerRef?.current.querySelector(
+      `[data-date="${acTiveScorePageMatchNavItem?.title}"]`
+    );
+
+    activeDateElement?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <Layout>
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <h4>SportDm News Admin</h4>
         </div>
-        <div className={classes.navSection}>
+        <div className={classes.navSection} ref={containerRef}>
           {navItems.map((data, i) => {
             return (
               <Link
@@ -58,6 +80,7 @@ const SportDmNewsContainer = (props) => {
                     ? `${classes.activeNav}`
                     : undefined
                 }
+                data-date={data.title}
               >
                 {location.pathname.includes(data.route) ? (
                   <div className={classes.activeIndicator}></div>
