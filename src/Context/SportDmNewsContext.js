@@ -10,20 +10,6 @@ const SportDmNewsContextProvider = (props) => {
   const [isSendingRequest, setIsSendingRequest] = useState(false);
   const [error, setError] = useState("");
   const [selectedArticle, setSelectedArticle] = useState();
-  const [articles, setArticles] = useState([]);
-  const [transferNews, setTransferNews] = useState([]);
-  const [transferNewsOffsetValue, setTransferNewsOffsetValue] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchedNews, setSearchNews] = useState([]);
-  const [searchOffsetValue, setSearchOffsetValue] = useState(0);
-  const [thisDayLastYear, setThisDayLastYear] = useState([]);
-  const [topStories, setTopStories] = useState([]);
-  const [displaySearchContainer, setDisplaySearchContainer] = useState(false);
-  const [basketBallNews, setBasketBallNews] = useState([]);
-  const [championsLeagueNews, setChampionsLeagueNews] = useState([]);
-  const [championsLeagueOffset, setChampionsLeagueOffset] = useState(0);
-  const [womenSportNews, setWomenSportNews] = useState([]);
-  const [womenSportNewsOffset, setWomenSportNewsOffset] = useState(0);
 
   //   Editable States
   const [headline, setHeadline] = useState("");
@@ -43,17 +29,11 @@ const SportDmNewsContextProvider = (props) => {
     setIsSendingRequest(true);
     axios
       .get(
-        `${process.env.REACT_APP_PA_API_DOMAIN}/v1/item?sort=issued:desc&sort=uri:asc&limit=20&offset=${offsetValue}&fields=total,limit,offset,item(uri,headline,subject,associations,description_text,subject,body_text,byline,firstcreated)`,
-        {
-          headers: {
-            apikey: process.env.REACT_APP_PA_API_KEY,
-            Accept: "application/json",
-          },
-        }
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNews?type=all-headlines
+`
       )
       .then((res) => {
-        console.log(res, "Headlines");
-        setHeadlines(res.data.item);
+        setHeadlines(res.data.data);
         setIsSendingRequest(false);
       })
       .catch((err) => {
@@ -63,20 +43,140 @@ const SportDmNewsContextProvider = (props) => {
       });
   };
 
-  const fetchSelectedArticle = (id) => {
-    setSelectedArticle();
+  const fetchAllTopStories = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
     axios
-      .get(`${process.env.REACT_APP_PA_API_DOMAIN}/v1/item/${id}`, {
-        headers: {
-          apikey: process.env.REACT_APP_PA_API_KEY,
-          Accept: "application/json",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNews?type=top-stories
+`
+      )
       .then((res) => {
-        setSelectedArticle(res.data);
+        setHeadlines(res.data.data);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        // console.log(err);
+        setIsSendingRequest(false);
+        setError(err.message);
+      });
+  };
+
+  const fetchFootballNews = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNews?type=football-news
+`
+      )
+      .then((res) => {
+        setHeadlines(res.data.data);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        // console.log(err);
+        setIsSendingRequest(false);
+        setError(err.message);
+      });
+  };
+
+  const fetchTransferNews = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNews?type=tranfer-news
+`
+      )
+      .then((res) => {
+        setHeadlines(res.data.data);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        // console.log(err);
+        setIsSendingRequest(false);
+        setError(err.message);
+      });
+  };
+
+  const fetchThisDayLastYear = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/thisDayLastYear`
+      )
+      .then((res) => {
+        setHeadlines(res.data.data);
+        setIsSendingRequest(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsSendingRequest(false);
+        setError(err.message);
+      });
+  };
+
+  const fetchChampionsLeague = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNews?type=champions-leagues`
+      )
+      .then((res) => {
+        setHeadlines(res.data.data);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsSendingRequest(false);
+        setError(err.message);
+      });
+  };
+
+  const fetchSelectedArticle = (id) => {
+    setSelectedArticle();
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNewsByID?uri=${id}`
+      )
+      .then((res) => {
+        console.log(res, "Selected");
+        setSelectedArticle(res.data.data);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsSendingRequest(false);
+      });
+  };
+
+  const updatedNewsObject = {
+    byline: byLine,
+    headline,
+    description_text: descriptionText,
+    description_html: descriptionHtml,
+    body_text: bodyText,
+    body_html: bodyHtml,
+  };
+
+  const updateNewsHandler = (id) => {
+    setIsSendingRequest(true);
+    axios
+      .post(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/updateNews/${id}`,
+        updatedNewsObject
+      )
+      .then((res) => {
+        console.log(res, "Updated");
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsSendingRequest(false);
       });
   };
 
@@ -104,6 +204,13 @@ const SportDmNewsContextProvider = (props) => {
         setbodyText,
         bodyHtml,
         setbodyHtml,
+        updateNewsHandler,
+        fetchAllTopStories,
+        fetchFootballNews,
+        fetchTransferNews,
+        fetchThisDayLastYear,
+        fetchChampionsLeague,
+        error,
       }}
     >
       {props.children}

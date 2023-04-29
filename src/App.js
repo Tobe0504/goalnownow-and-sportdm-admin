@@ -13,8 +13,13 @@ import Login from "./Containers/Login/Login";
 import Restricted from "./Components/Restricted/Restricted";
 import SinglyAdContainer from "./Containers/SinglyAdContainer/SinglyAdContainer";
 import SignUp from "./Containers/SignUp/SignUp";
-import SportDmNewsContainer from "./Containers/SportDmNewsContainer/SportDmNewsContainer";
 import EditNewsContainer from "./Containers/EditNewsContainer/EditNewsContainer";
+import AllHeadLinesContainer from "./Containers/AllHeadLinesContainer/AllHeadLinesContainer";
+import TopStoriesContainer from "./Containers/TopStoriesContainer/TopStoriesContainer";
+import FootballNewsContainer from "./Containers/FootballNewsContainer/FootballNewsContainer";
+import TransferNewsContainer from "./Containers/TransferNewsContainer/TransferNewsContainer";
+import ThisDayLastYearNewsContainer from "./Containers/ThisDayLastYearNewsContainer/ThisDayLastYearNewsContainer";
+import ChampionsLeagueNewsContainer from "./Containers/ChanpionsLeagueNewsContainer/ChanpionsLeagueNewsContainer";
 
 function App() {
   return (
@@ -73,7 +78,30 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route
           path="/sportdm-news/all-headlines"
-          element={<SportDmNewsContainer />}
+          element={<AllHeadLinesContainer />}
+        />
+        <Route
+          path="/sportdm-news/top-stories"
+          element={<TopStoriesContainer />}
+        />
+
+        <Route
+          path="/sportdm-news/football-news"
+          element={<FootballNewsContainer />}
+        />
+
+        <Route
+          path="/sportdm-news/transfer-news"
+          element={<TransferNewsContainer />}
+        />
+        <Route
+          path="/sportdm-news/this-day-last-year"
+          element={<ThisDayLastYearNewsContainer />}
+        />
+
+        <Route
+          path="/sportdm-news/champions-league-news"
+          element={<ChampionsLeagueNewsContainer />}
         />
 
         <Route

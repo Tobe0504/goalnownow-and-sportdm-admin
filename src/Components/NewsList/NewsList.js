@@ -20,10 +20,14 @@ const NewsList = (props) => {
 
   useEffect(() => {
     setOffsetValue(0);
+
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     props.fetchFunction();
+
+    // eslint-disable-next-line
   }, [offsetValue]);
 
   return (
@@ -67,7 +71,7 @@ const NewsList = (props) => {
                     <FontAwesomeIcon
                       icon={faPencil}
                       onClick={() => {
-                        navigate(`/sportdm-news/edit/${item.id}`);
+                        navigate(`/sportdm-news/edit/${item.uri}`);
                       }}
                     />
                   </div>
@@ -111,14 +115,14 @@ const NewsList = (props) => {
         })
       )}
 
-      <div
+      {/* <div
         className={classes.showMore}
         onClick={() => {
           setOffsetValue((prevState) => prevState + 10);
         }}
       >
         Show more
-      </div>
+      </div> */}
     </div>
   );
 };

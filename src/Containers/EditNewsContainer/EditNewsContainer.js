@@ -6,11 +6,7 @@ import { SportDmNewsContext } from "../../Context/SportDmNewsContext";
 import classes from "./EditNewsContainer.module.css";
 import { CircularProgress } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleLeft,
-  faImage,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../Components/Input/Input";
 
 const EditNewsContainer = () => {
@@ -31,6 +27,7 @@ const EditNewsContainer = () => {
     setbodyText,
     bodyHtml,
     setbodyHtml,
+    updateNewsHandler,
   } = useContext(SportDmNewsContext);
 
   // Params
@@ -39,7 +36,22 @@ const EditNewsContainer = () => {
   // Effects
   useEffect(() => {
     fetchSelectedArticle(newsId);
+
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      setHeadline(selectedArticle.headline);
+      setByline(selectedArticle.byline);
+      setDescriptionText(selectedArticle.description_text);
+      setDescriptionHtml(selectedArticle.description_html);
+      setbodyText(selectedArticle.body_text);
+      setbodyHtml(selectedArticle.body_html);
+    }
+
+    // eslint-disable-next-line
+  }, [selectedArticle]);
 
   // navigate
   const navigate = useNavigate();
@@ -87,7 +99,7 @@ const EditNewsContainer = () => {
             <div>
               <Input
                 type="text"
-                value={selectedArticle?.headline}
+                value={headline}
                 onChange={(e) => {
                   setHeadline(e.target.value);
                 }}
@@ -101,7 +113,7 @@ const EditNewsContainer = () => {
             <div>
               <Input
                 type="text"
-                value={selectedArticle?.byline}
+                value={byLine}
                 onChange={(e) => {
                   setByline(e.target.value);
                 }}
@@ -115,7 +127,7 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={selectedArticle?.description_text}
+                value={descriptionText}
                 onChange={(e) => {
                   setDescriptionText(e.target.value);
                 }}
@@ -129,7 +141,7 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={selectedArticle?.description_html}
+                value={descriptionHtml}
                 onChange={(e) => {
                   setDescriptionHtml(e.target.value);
                 }}
@@ -143,7 +155,7 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={selectedArticle?.body_text}
+                value={bodyText}
                 onChange={(e) => {
                   setbodyText(e.target.value);
                 }}
@@ -157,13 +169,35 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={selectedArticle?.body_html}
+                value={bodyHtml}
                 onChange={(e) => {
                   setbodyHtml(e.target.value);
                 }}
                 placeholder="Body HTML"
               />
             </div>
+          </div>
+
+          <div className={classes.buttonSection}>
+            <span>
+              <button
+                className={classes.uploadButton}
+                onClick={() => {
+                  //   editAd(adId);
+                  updateNewsHandler(selectedArticle.uri);
+                }}
+              >
+                {isSendingRequest ? (
+                  <CircularProgress
+                    size="1rem"
+                    color="inherit"
+                    style={{ color: "#000000" }}
+                  />
+                ) : (
+                  "Update News"
+                )}
+              </button>
+            </span>
           </div>
         </div>
       </div>
