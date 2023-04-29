@@ -1,8 +1,14 @@
 import classes from "./SportDmNewsContainer.module.css";
 import Layout from "../../Components/Layout/Layout";
 import { Link, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { SportDmNewsContext } from "../../Context/SportDmNewsContext";
+import NewsList from "../../Components/NewsList/NewsList";
 
 const SportDmNewsContainer = () => {
+  // context
+  const { fetchAllHeadlines, headlines, setHeadlines } =
+    useContext(SportDmNewsContext);
   // Utils
   const navItems = [
     {
@@ -40,6 +46,13 @@ const SportDmNewsContainer = () => {
   // location
   const location = useLocation();
 
+  //   Effects
+  useEffect(() => {
+    fetchAllHeadlines();
+
+    console.log("Okay");
+  }, []);
+
   return (
     <Layout>
       <div className={classes.container}>
@@ -69,6 +82,14 @@ const SportDmNewsContainer = () => {
               </Link>
             );
           })}
+        </div>
+
+        <div className={classes.goalNowNowAds}>
+          <NewsList
+            list={headlines}
+            setList={setHeadlines}
+            fetchFunction={fetchAllHeadlines}
+          />
         </div>
       </div>
     </Layout>

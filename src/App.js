@@ -14,6 +14,7 @@ import Restricted from "./Components/Restricted/Restricted";
 import SinglyAdContainer from "./Containers/SinglyAdContainer/SinglyAdContainer";
 import SignUp from "./Containers/SignUp/SignUp";
 import SportDmNewsContainer from "./Containers/SportDmNewsContainer/SportDmNewsContainer";
+import EditNewsContainer from "./Containers/EditNewsContainer/EditNewsContainer";
 
 function App() {
   return (
@@ -73,6 +74,11 @@ function App() {
         <Route
           path="/sportdm-news/all-headlines"
           element={<SportDmNewsContainer />}
+        />
+
+        <Route
+          path="/sportdm-news/edit/:newsId"
+          element={<EditNewsContainer />}
         />
       </Routes>
     </Router>

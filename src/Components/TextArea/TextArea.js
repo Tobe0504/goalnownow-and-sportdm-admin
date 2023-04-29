@@ -1,10 +1,10 @@
 import React from "react";
-import classes from "./Input.module.css";
+import classes from "./TextArea.module.css";
 
-const Input = (props) => {
+const TextArea = (props) => {
   return (
     <div className={classes.inputSubClass}>
-      <input
+      <textarea
         type={props.type}
         placeholder={props.placeholder}
         className={
@@ -30,4 +30,4 @@ const Input = (props) => {
   );
 };
 
-export default Input;
+export default TextArea;

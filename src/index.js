@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AdContextProvider from "./Context/AdContext";
 import AuthContextProvider from "./Context/AuthContext";
+import SportDmNewsContextProvider from "./Context/SportDmNewsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
     <AdContextProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <SportDmNewsContextProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </SportDmNewsContextProvider>
     </AdContextProvider>
   </AuthContextProvider>
 );
