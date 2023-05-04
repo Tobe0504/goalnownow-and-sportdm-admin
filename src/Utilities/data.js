@@ -52,7 +52,7 @@ export const sportDmAdPagesAndSections = [
     page: "SportDm",
 
     sections: [
-      "970px by 250px under the date display bon the home",
+      "970px by 250px under the date display on the home",
       "540px by 540px Lightbox popup",
       "1080px by 1920px Lightbox popup (Mobile)",
       "728px by 90px between the first home section and the second home section",
@@ -69,7 +69,7 @@ export const sportDmAdPagesAndSections = [
     page: "SportDm",
 
     sections: [
-      "970px by 250px at the top of the articles page just vefore the news content",
+      "970px by 250px at the top of the articles page just before the news content",
       "300px by 250px the first",
       "300px by 250px the second",
       "120px by 600px the after the third related articles section",
