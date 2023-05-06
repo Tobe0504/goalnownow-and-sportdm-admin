@@ -125,7 +125,7 @@ const AdContextProvider = (props) => {
     setIsSendingRequest(true);
     axios
       .get(
-        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=GH&platform=goalnownow`,
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=KE&platform=goalnownow`,
         createAdObject
       )
       .then((res) => {
