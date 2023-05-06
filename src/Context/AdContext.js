@@ -45,6 +45,7 @@ const AdContextProvider = (props) => {
   // Create Ad
   const createAd = () => {
     setIsSendingRequest(true);
+    setCreateError([]);
     axios
       .post(
         `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/createAds`,
@@ -167,6 +168,7 @@ const AdContextProvider = (props) => {
   };
 
   const editAd = (id) => {
+    setAlert("");
     setIsSendingRequest(true);
     axios
       .post(

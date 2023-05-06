@@ -315,7 +315,6 @@ const EditAd = () => {
               <label htmlFor="idInput">Select Image</label>
               <input
                 type="file"
-                multiple
                 name=""
                 id="idInput"
                 accept="image/*"

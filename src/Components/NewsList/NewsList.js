@@ -1,10 +1,10 @@
 import classes from "./NewsList.module.css";
 import { CircularProgress } from "@mui/material";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import {
-  activeToggler,
+  // activeToggler,
   activeTogglerAllFalse,
 } from "../../HelperFunctions/ActiveToggler";
 import { useContext, useEffect } from "react";
@@ -75,13 +75,13 @@ const NewsList = (props) => {
                       }}
                     />
                   </div>
-                  <div
+                  {/* <div
                     onClick={() => {
                       activeToggler(i, props.list, props.setList);
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div

@@ -18,6 +18,7 @@ const SportDmNewsContextProvider = (props) => {
   const [descriptionHtml, setDescriptionHtml] = useState("");
   const [bodyText, setbodyText] = useState("");
   const [bodyHtml, setbodyHtml] = useState(" ");
+  const [newsImage, setNewsImage] = useState("");
 
   if (offsetValue > 100) {
     setOffsetValue(0);
@@ -37,7 +38,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -56,7 +56,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -75,7 +74,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -94,7 +92,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -112,7 +109,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -130,7 +126,7 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -144,12 +140,10 @@ const SportDmNewsContextProvider = (props) => {
         `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/getNewsByID?uri=${id}`
       )
       .then((res) => {
-        console.log(res, "Selected");
         setSelectedArticle(res.data.data);
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        console.log(err);
         setIsSendingRequest(false);
       });
   };
@@ -161,6 +155,7 @@ const SportDmNewsContextProvider = (props) => {
     description_html: descriptionHtml,
     body_text: bodyText,
     body_html: bodyHtml,
+    picture: newsImage,
   };
 
   const updateNewsHandler = (id) => {
@@ -171,11 +166,10 @@ const SportDmNewsContextProvider = (props) => {
         updatedNewsObject
       )
       .then((res) => {
-        console.log(res, "Updated");
         setIsSendingRequest(false);
+        setError(res.data.message);
       })
       .catch((err) => {
-        console.log(err);
         setIsSendingRequest(false);
       });
   };
@@ -211,6 +205,9 @@ const SportDmNewsContextProvider = (props) => {
         fetchThisDayLastYear,
         fetchChampionsLeague,
         error,
+        setError,
+        newsImage,
+        setNewsImage,
       }}
     >
       {props.children}
