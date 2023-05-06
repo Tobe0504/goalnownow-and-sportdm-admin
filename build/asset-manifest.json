@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/goalnownow-and-sportdm-admin/static/css/main.447662cb.css",
-    "main.js": "/goalnownow-and-sportdm-admin/static/js/main.b0051fd4.js",
+    "main.css": "/goalnownow-and-sportdm-admin/static/css/main.453d0060.css",
+    "main.js": "/goalnownow-and-sportdm-admin/static/js/main.52111706.js",
     "static/js/787.cf297dad.chunk.js": "/goalnownow-and-sportdm-admin/static/js/787.cf297dad.chunk.js",
     "static/media/goalNowNowLogo.png": "/goalnownow-and-sportdm-admin/static/media/goalNowNowLogo.f439bed0692dcce3f6bd.png",
     "index.html": "/goalnownow-and-sportdm-admin/index.html",
-    "main.447662cb.css.map": "/goalnownow-and-sportdm-admin/static/css/main.447662cb.css.map",
-    "main.b0051fd4.js.map": "/goalnownow-and-sportdm-admin/static/js/main.b0051fd4.js.map",
+    "main.453d0060.css.map": "/goalnownow-and-sportdm-admin/static/css/main.453d0060.css.map",
+    "main.52111706.js.map": "/goalnownow-and-sportdm-admin/static/js/main.52111706.js.map",
     "787.cf297dad.chunk.js.map": "/goalnownow-and-sportdm-admin/static/js/787.cf297dad.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.447662cb.css",
-    "static/js/main.b0051fd4.js"
+    "static/css/main.453d0060.css",
+    "static/js/main.52111706.js"
   ]
 }

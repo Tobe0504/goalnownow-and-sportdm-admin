@@ -3,18 +3,19 @@ import { AdContext } from "../../Context/AdContext";
 
 import PlatformAds from "../../Components/PlatformAds/PlatformAds";
 
-const SportDmAds = () => {
+const SportDmGHAds = () => {
   // context
-  const { fetchSportDmAds, sportDmAds, setSportDmAds } = useContext(AdContext);
+  const { fetchSportDmGHAds, sportDmAds, setSportDmAds } =
+    useContext(AdContext);
 
   return (
     <PlatformAds
       list={sportDmAds}
       setList={setSportDmAds}
-      fetchFunction={fetchSportDmAds}
+      fetchFunction={fetchSportDmGHAds}
       platform="sportdm"
     />
   );
 };
 
-export default SportDmAds;
+export default SportDmGHAds;

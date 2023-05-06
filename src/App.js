@@ -20,6 +20,10 @@ import FootballNewsContainer from "./Containers/FootballNewsContainer/FootballNe
 import TransferNewsContainer from "./Containers/TransferNewsContainer/TransferNewsContainer";
 import ThisDayLastYearNewsContainer from "./Containers/ThisDayLastYearNewsContainer/ThisDayLastYearNewsContainer";
 import ChampionsLeagueNewsContainer from "./Containers/ChanpionsLeagueNewsContainer/ChanpionsLeagueNewsContainer";
+import SportDmGHAds from "./Containers/SportDmGhAds/SportDmGhAds";
+import SportDMKEAds from "./Containers/SportDMKEAds/SportDMKEAds";
+import GoalNowNowGhAds from "./Containers/GoalNowNowGhAds/GoalNowNowGhAds";
+import GoalNowNowKeAds from "./Containers/GoalNowNowKeAds/GoalNowNowKeAds";
 
 function App() {
   return (
@@ -29,23 +33,59 @@ function App() {
           path="/"
           element={
             <Restricted>
-              <Navigate to="/ads/goalnownow" />
+              <Navigate to="/ads/goalnownow/ng" />
             </Restricted>
           }
         />
         <Route
-          path="/ads/goalnownow"
+          path="/ads/goalnownow/ng"
           element={
             <Restricted>
               <GoalNowNowAds />
             </Restricted>
           }
         />
+
         <Route
-          path="/ads/sportdm"
+          path="/ads/goalnownow/gh"
+          element={
+            <Restricted>
+              <GoalNowNowGhAds />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="/ads/goalnownow/ke"
+          element={
+            <Restricted>
+              <GoalNowNowKeAds />
+            </Restricted>
+          }
+        />
+        <Route
+          path="/ads/sportdm/ng"
           element={
             <Restricted>
               <SportDmAds />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="/ads/sportdm/gh"
+          element={
+            <Restricted>
+              <SportDmGHAds />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="/ads/sportdm/ke"
+          element={
+            <Restricted>
+              <SportDMKEAds />
             </Restricted>
           }
         />

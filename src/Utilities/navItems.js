@@ -10,7 +10,7 @@ export const navItems = [
     title: "Ads",
     icon: <FontAwesomeIcon icon={faRectangleAd} />,
     isActive: false,
-    route: "/ads/goalnownow",
+    route: "/ads/goalnownow/ng",
   },
   {
     id: v4(),

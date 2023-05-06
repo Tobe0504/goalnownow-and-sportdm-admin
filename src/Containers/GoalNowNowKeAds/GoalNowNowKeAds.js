@@ -3,19 +3,19 @@ import { AdContext } from "../../Context/AdContext";
 
 import PlatformAds from "../../Components/PlatformAds/PlatformAds";
 
-const GoalNowNowAds = () => {
+const GoalNowNowKeAds = () => {
   // context
-  const { fetchGoalNowNowAds, goalNowNowAds, setGoalNowNowAds } =
+  const { fetchGoalNowNowKEAds, goalNowNowAds, setGoalNowNowAds } =
     useContext(AdContext);
 
   return (
     <PlatformAds
       list={goalNowNowAds}
       setList={setGoalNowNowAds}
-      fetchFunction={fetchGoalNowNowAds}
+      fetchFunction={fetchGoalNowNowKEAds}
       platform="goalnownow"
     />
   );
 };
 
-export default GoalNowNowAds;
+export default GoalNowNowKeAds;

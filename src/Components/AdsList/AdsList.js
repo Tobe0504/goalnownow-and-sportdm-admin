@@ -37,8 +37,8 @@ const AdsList = (props) => {
         </div>
       )}
 
-      {props.list.length < 0 && !isSendingRequest ? (
-        <div>No Ads found</div>
+      {props.list.length < 1 && !isSendingRequest ? (
+        <div className={classes.noNews}>No Ads found</div>
       ) : (
         props.list.map((item, i) => {
           return (

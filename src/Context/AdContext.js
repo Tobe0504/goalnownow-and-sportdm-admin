@@ -22,6 +22,8 @@ const AdContextProvider = (props) => {
   const [singlyAd, setSinglyAd] = useState();
   const [alert, setAlert] = useState("");
   const [createError, setCreateError] = useState([]);
+  const [sportDmKEAds, setSportDmKEADs] = useState([]);
+  const [sportDmGHAds, setSportDmGHADs] = useState([]);
 
   // user token
   const adminUserToken = localStorage.getItem("gnn_and_sport_admin_user_token");
@@ -96,6 +98,50 @@ const AdContextProvider = (props) => {
       });
   };
 
+  const fetchGoalNowNowGHAds = () => {
+    setGoalNowNowAds([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=GH&platform=goalnownow`,
+        createAdObject
+      )
+      .then((res) => {
+        setGoalNowNowAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err, "Test err");
+        setIsSendingRequest(false);
+      });
+  };
+
+  const fetchGoalNowNowKEAds = () => {
+    setGoalNowNowAds([]);
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=GH&platform=goalnownow`,
+        createAdObject
+      )
+      .then((res) => {
+        setGoalNowNowAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err, "Test err");
+        setIsSendingRequest(false);
+      });
+  };
+
   // Fetch ads by platform
   const fetchSportDmAds = () => {
     setSportDmAds([]);
@@ -115,7 +161,53 @@ const AdContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        console.log(err, "Test err");
+        console.log(err, "Test err from sportdm");
+        setIsSendingRequest(false);
+      });
+  };
+
+  const fetchSportDmKEAds = () => {
+    setSportDmAds([]);
+    setIsSendingRequest(true);
+    setAlert();
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=KE&platform=sportdm`,
+        createAdObject
+      )
+      .then((res) => {
+        setSportDmAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err, "Test err from sportdm");
+        setIsSendingRequest(false);
+      });
+  };
+
+  const fetchSportDmGHAds = () => {
+    setSportDmAds([]);
+    setIsSendingRequest(true);
+    setAlert();
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/filterPlatform?country=GH&platform=sportdm`,
+        createAdObject
+      )
+      .then((res) => {
+        setSportDmAds(
+          res.data.data.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err, "Test err from sportdm");
         setIsSendingRequest(false);
       });
   };
@@ -231,6 +323,14 @@ const AdContextProvider = (props) => {
         setMediaType,
         createError,
         setCreateError,
+        fetchSportDmGHAds,
+        fetchSportDmKEAds,
+        sportDmGHAds,
+        setSportDmGHADs,
+        sportDmKEAds,
+        setSportDmKEADs,
+        fetchGoalNowNowKEAds,
+        fetchGoalNowNowGHAds,
       }}
     >
       {props.children}
