@@ -72,7 +72,7 @@ const SportDmNewsContainer = (props) => {
           <h4>SportDm News Admin</h4>
           <button
             onClick={() => {
-              navigate("/news/create-news");
+              navigate("/sportdm-news/create-news");
             }}
           >
             <span>

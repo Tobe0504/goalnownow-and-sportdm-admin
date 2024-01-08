@@ -1,65 +1,29 @@
-import { useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../Components/Layout/Layout";
 import TextArea from "../../Components/TextArea/TextArea";
 import { SportDmNewsContext } from "../../Context/SportDmNewsContext";
-import classes from "./EditNewsContainer.module.css";
+import classes from "../EditNewsContainer/EditNewsContainer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../Components/Input/Input";
 import { CircularProgress, Alert, Snackbar } from "@mui/material";
 
-const EditNewsContainer = () => {
+const CreateNewsContainer = () => {
   // Context
+
   const {
     isSendingRequest,
-    selectedArticle,
-    fetchSelectedArticle,
-    headline,
-    setHeadline,
-    byLine,
-    setByline,
-    descriptionHtml,
-    setDescriptionHtml,
-    descriptionText,
-    setDescriptionText,
-    bodyText,
-    setbodyText,
-    bodyHtml,
-    setbodyHtml,
-    updateNewsHandler,
-    newsImage,
-    setNewsImage,
     error,
     setError,
+    setCreateNewsObject,
+    createNewsObject,
+    createNews,
   } = useContext(SportDmNewsContext);
-
-  // Params
-  const { newsId } = useParams();
-
-  // Effects
-  useEffect(() => {
-    fetchSelectedArticle(newsId);
-
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (selectedArticle) {
-      setHeadline(selectedArticle.headline);
-      setByline(selectedArticle.byline);
-      setDescriptionText(selectedArticle.description_text);
-      setDescriptionHtml(selectedArticle.description_html);
-      setbodyText(selectedArticle.body_text);
-      setbodyHtml(selectedArticle.body_html);
-      setNewsImage(selectedArticle.picture);
-    }
-
-    // eslint-disable-next-line
-  }, [selectedArticle]);
 
   // navigate
   const navigate = useNavigate();
+  const [imageView, setImageView] = useState("");
 
   const imageChangeHandler = (event) => {
     const selectedImage = event.target.files[0];
@@ -70,12 +34,25 @@ const EditNewsContainer = () => {
     // When the FileReader has finished reading the contents of the selected image file
     reader.onload = (e) => {
       // Set the image contents to the state
-      setNewsImage(e.target.result);
+      setImageView(e.target.result);
+
+      setCreateNewsObject((prevState) => {
+        return { ...prevState, image: selectedImage };
+      });
+      console.log(selectedImage);
     };
 
     // Read the contents of the selected image file
     reader.readAsDataURL(selectedImage);
   };
+
+  const onChangeHandler = (e) => {
+    setCreateNewsObject((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
+
+  console.log(createNewsObject);
 
   return (
     <Layout>
@@ -125,7 +102,7 @@ const EditNewsContainer = () => {
               navigate(-1);
             }}
           >
-            Edit {selectedArticle?.headline}
+            Create news
           </h4>
         </div>
 
@@ -135,11 +112,10 @@ const EditNewsContainer = () => {
             <div>
               <Input
                 type="text"
-                value={headline}
-                onChange={(e) => {
-                  setHeadline(e.target.value);
-                }}
                 placeholder="Headline"
+                name="headline"
+                onChange={onChangeHandler}
+                value={createNewsObject.headline}
               />
             </div>
           </div>
@@ -149,11 +125,9 @@ const EditNewsContainer = () => {
             <div>
               <Input
                 type="text"
-                value={byLine}
-                onChange={(e) => {
-                  setByline(e.target.value);
-                }}
                 placeholder="By Line (Author)"
+                readOnly
+                value="By SportDm"
               />
             </div>
           </div>
@@ -163,25 +137,10 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={descriptionText}
-                onChange={(e) => {
-                  setDescriptionText(e.target.value);
-                }}
                 placeholder="Description text"
-              />
-            </div>
-          </div>
-
-          <div className={classes.adDetailItem}>
-            <p>Description HTML:</p>
-            <div>
-              <TextArea
-                type="text"
-                value={descriptionHtml}
-                onChange={(e) => {
-                  setDescriptionHtml(e.target.value);
-                }}
-                placeholder="Description HTML"
+                name="description"
+                onChange={onChangeHandler}
+                value={createNewsObject.description}
               />
             </div>
           </div>
@@ -191,25 +150,10 @@ const EditNewsContainer = () => {
             <div>
               <TextArea
                 type="text"
-                value={bodyText}
-                onChange={(e) => {
-                  setbodyText(e.target.value);
-                }}
                 placeholder="Body Text"
-              />
-            </div>
-          </div>
-
-          <div className={classes.adDetailItem}>
-            <p>Body HTML:</p>
-            <div>
-              <TextArea
-                type="text"
-                value={bodyHtml}
-                onChange={(e) => {
-                  setbodyHtml(e.target.value);
-                }}
-                placeholder="Body HTML"
+                name="body"
+                onChange={onChangeHandler}
+                value={createNewsObject.body}
               />
             </div>
           </div>
@@ -218,7 +162,7 @@ const EditNewsContainer = () => {
             <p>News Image</p>
             <div>
               <div className={classes.imageUpload}>
-                <img src={newsImage} alt="News" />
+                {createNewsObject.image && <img src={imageView} alt="News" />}
                 <input
                   type="file"
                   id="imageChange"
@@ -227,7 +171,7 @@ const EditNewsContainer = () => {
                     imageChangeHandler(e);
                   }}
                 />
-                <label htmlFor="imageChange">Change Image</label>
+                <label htmlFor="imageChange">Upload Image</label>
               </div>
             </div>
           </div>
@@ -237,8 +181,8 @@ const EditNewsContainer = () => {
               <button
                 className={classes.uploadButton}
                 onClick={() => {
-                  //   editAd(adId);
-                  updateNewsHandler(selectedArticle.uri);
+                  createNews();
+                  console.log(createNewsObject, "Object");
                 }}
               >
                 {isSendingRequest ? (
@@ -248,7 +192,7 @@ const EditNewsContainer = () => {
                     style={{ color: "#000000" }}
                   />
                 ) : (
-                  "Update News"
+                  "Create News"
                 )}
               </button>
             </span>
@@ -259,4 +203,4 @@ const EditNewsContainer = () => {
   );
 };
 
-export default EditNewsContainer;
+export default CreateNewsContainer;

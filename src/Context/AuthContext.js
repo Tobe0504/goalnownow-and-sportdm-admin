@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -27,6 +28,11 @@ const AuthContextProvider = (props) => {
 
   const userToken = localStorage?.getItem("gnn_and_sport_admin_user_token");
 
+  // Router
+  const location = useLocation();
+  const redirectRoute = location.state || "/";
+  const navigate = useNavigate();
+
   // if (userToken) {
   //   setUserIsLoggedIn(true);
   // } else {
@@ -43,16 +49,19 @@ const AuthContextProvider = (props) => {
       )
       .then((res) => {
         console.log(res);
+        navigate(redirectRoute);
         setIsSendingRequest(false);
         localStorage.setItem(
           "gnn_and_sport_admin_user_token",
           res.data.access_token
         );
-        if (process.env.NODE_ENV === "development") {
-          window.location.href = "/";
-        } else {
-          window.location.href = "/goalnownow-and-sportdm-admin/";
-        }
+
+        // if (process.env.NODE_ENV === "development") {
+        //   window.location.href = "/";
+        // } else {
+        //   window.location.href = "/goalnownow-and-sportdm-admin/";
+        // }
+
         console.log(process.env);
       })
       .catch((err) => {

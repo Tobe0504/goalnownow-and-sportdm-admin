@@ -19,6 +19,12 @@ const SportDmNewsContextProvider = (props) => {
   const [bodyText, setbodyText] = useState("");
   const [bodyHtml, setbodyHtml] = useState(" ");
   const [newsImage, setNewsImage] = useState("");
+  const [createNewsObject, setCreateNewsObject] = useState({
+    headline: "",
+    description: "",
+    body: "",
+    image: "",
+  });
 
   if (offsetValue > 100) {
     setOffsetValue(0);
@@ -174,6 +180,45 @@ const SportDmNewsContextProvider = (props) => {
       });
   };
 
+  const createNewsFormData = new FormData();
+
+  useEffect(() => {
+    createNewsFormData.append("title", createNewsObject.headline);
+    createNewsFormData.append(
+      "short_description",
+      createNewsObject.description
+    );
+    createNewsFormData.append("full_description", createNewsObject.body);
+    createNewsFormData.append("image", createNewsObject.image);
+
+    // eslint-disable-next-line
+  }, [createNewsObject]);
+
+  const createNews = () => {
+    setHeadlines([]);
+    setIsSendingRequest(true);
+    axios
+      .post(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/createNews`,
+        createNewsFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        // setHeadlines(res.data.data);
+        console.log(res);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        setIsSendingRequest(false);
+        setError(err.response ? err?.response?.data?.message : err.message);
+        console.log(err);
+      });
+  };
+
   useEffect(() => {});
   return (
     <SportDmNewsContext.Provider
@@ -208,6 +253,9 @@ const SportDmNewsContextProvider = (props) => {
         setError,
         newsImage,
         setNewsImage,
+        createNewsObject,
+        setCreateNewsObject,
+        createNews,
       }}
     >
       {props.children}
