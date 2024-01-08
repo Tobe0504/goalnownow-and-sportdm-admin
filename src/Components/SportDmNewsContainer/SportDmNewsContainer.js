@@ -1,7 +1,9 @@
 import classes from "./SportDmNewsContainer.module.css";
 import Layout from "../Layout/Layout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const SportDmNewsContainer = (props) => {
   // Utils
@@ -40,6 +42,7 @@ const SportDmNewsContainer = (props) => {
 
   // location
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Refs
   const containerRef = useRef(null);
@@ -67,6 +70,16 @@ const SportDmNewsContainer = (props) => {
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <h4>SportDm News Admin</h4>
+          <button
+            onClick={() => {
+              navigate("/news/create-news");
+            }}
+          >
+            <span>
+              <FontAwesomeIcon icon={faPlus} />
+            </span>
+            <span>Create News</span>
+          </button>
         </div>
         <div className={classes.navSection} ref={containerRef}>
           {navItems.map((data, i) => {

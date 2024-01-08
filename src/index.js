@@ -6,18 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import AdContextProvider from "./Context/AdContext";
 import AuthContextProvider from "./Context/AuthContext";
 import SportDmNewsContextProvider from "./Context/SportDmNewsContext";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <AdContextProvider>
-      <SportDmNewsContextProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </SportDmNewsContextProvider>
-    </AdContextProvider>
-  </AuthContextProvider>
+  <Router>
+    <AuthContextProvider>
+      <AdContextProvider>
+        <SportDmNewsContextProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </SportDmNewsContextProvider>
+      </AdContextProvider>
+    </AuthContextProvider>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

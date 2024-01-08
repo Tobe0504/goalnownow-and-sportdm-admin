@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
-const Restricted = (props) => {
+const Restricted = () => {
   // Context
   const { userToken } = useContext(AuthContext);
 
@@ -12,7 +12,7 @@ const Restricted = (props) => {
   const location = useLocation();
 
   return userToken ? (
-    props.children
+    <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   );

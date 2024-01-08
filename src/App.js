@@ -1,10 +1,5 @@
 import "./App.css";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import GoalNowNowAds from "./Containers/GoalNowNowAds/GoalNowNowAds";
 import SportDmAds from "./Containers/SportDmAds/SportDmAds";
 import CreateAd from "./Containers/CreateAd/CreateAd";
@@ -27,95 +22,18 @@ import GoalNowNowKeAds from "./Containers/GoalNowNowKeAds/GoalNowNowKeAds";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Restricted>
-              <Navigate to="/ads/goalnownow/ng" />
-            </Restricted>
-          }
-        />
-        <Route
-          path="/ads/goalnownow/ng"
-          element={
-            <Restricted>
-              <GoalNowNowAds />
-            </Restricted>
-          }
-        />
-
-        <Route
-          path="/ads/goalnownow/gh"
-          element={
-            <Restricted>
-              <GoalNowNowGhAds />
-            </Restricted>
-          }
-        />
-
-        <Route
-          path="/ads/goalnownow/ke"
-          element={
-            <Restricted>
-              <GoalNowNowKeAds />
-            </Restricted>
-          }
-        />
-        <Route
-          path="/ads/sportdm/ng"
-          element={
-            <Restricted>
-              <SportDmAds />
-            </Restricted>
-          }
-        />
-
-        <Route
-          path="/ads/sportdm/gh"
-          element={
-            <Restricted>
-              <SportDmGHAds />
-            </Restricted>
-          }
-        />
-
-        <Route
-          path="/ads/sportdm/ke"
-          element={
-            <Restricted>
-              <SportDMKEAds />
-            </Restricted>
-          }
-        />
-        <Route
-          path="/ads/create-new-ad"
-          element={
-            <Restricted>
-              <CreateAd />
-            </Restricted>
-          }
-        />
-        <Route
-          path="/ads/edit-ad/:adId"
-          element={
-            <Restricted>
-              <EditAd />
-            </Restricted>
-          }
-        />
-
-        <Route
-          path="/ad-info/:adId"
-          element={
-            <Restricted>
-              <SinglyAdContainer />
-            </Restricted>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
+    <Routes>
+      <Route element={<Restricted />}>
+        <Route path="/" element={<Navigate to="/ads/goalnownow/ng" />} />
+        <Route path="/ads/goalnownow/ng" element={<GoalNowNowAds />} />
+        <Route path="/ads/goalnownow/gh" element={<GoalNowNowGhAds />} />
+        <Route path="/ads/goalnownow/ke" element={<GoalNowNowKeAds />} />
+        <Route path="/ads/sportdm/ng" element={<SportDmAds />} />
+        <Route path="/ads/sportdm/gh" element={<SportDmGHAds />} />
+        <Route path="/ads/sportdm/ke" element={<SportDMKEAds />} />
+        <Route path="/ads/create-new-ad" element={<CreateAd />} />
+        <Route path="/ads/edit-ad/:adId" element={<EditAd />} />
+        <Route path="/ad-info/:adId" element={<SinglyAdContainer />} />
         <Route
           path="/sportdm-news/all-headlines"
           element={<AllHeadLinesContainer />}
@@ -148,8 +66,11 @@ function App() {
           path="/sportdm-news/edit/:newsId"
           element={<EditNewsContainer />}
         />
-      </Routes>
-    </Router>
+      </Route>
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<SignUp />} />
+    </Routes>
   );
 }
 
