@@ -14,6 +14,11 @@ const SportDmNewsContainer = (props) => {
       route: `/sportdm-news/all-headlines`,
     },
     {
+      title: "Created News",
+      isActive: false,
+      route: `/sportdm-news/created-news`,
+    },
+    {
       title: "Top Stories",
       isActive: false,
       route: `/sportdm-news/top-stories`,

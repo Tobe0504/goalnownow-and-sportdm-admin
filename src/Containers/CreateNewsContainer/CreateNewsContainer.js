@@ -19,6 +19,8 @@ const CreateNewsContainer = () => {
     setCreateNewsObject,
     createNewsObject,
     createNews,
+    success,
+    setSuccess,
   } = useContext(SportDmNewsContext);
 
   // navigate
@@ -39,7 +41,6 @@ const CreateNewsContainer = () => {
       setCreateNewsObject((prevState) => {
         return { ...prevState, image: selectedImage };
       });
-      console.log(selectedImage);
     };
 
     // Read the contents of the selected image file
@@ -51,8 +52,6 @@ const CreateNewsContainer = () => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
-
-  console.log(createNewsObject);
 
   return (
     <Layout>
@@ -83,11 +82,24 @@ const CreateNewsContainer = () => {
             setError();
           }}
         >
-          <Alert severity="success" variant="outlined">
+          <Alert severity="error" variant="outlined">
             {error}
           </Alert>
         </Snackbar>
       )}
+
+      <Snackbar
+        open={Boolean(success)}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSuccess();
+        }}
+      >
+        <Alert severity="success" variant="outlined">
+          {success}
+        </Alert>
+      </Snackbar>
+
       <div className={classes.container}>
         <div className={classes.headerContainer}>
           <span
@@ -182,7 +194,6 @@ const CreateNewsContainer = () => {
                 className={classes.uploadButton}
                 onClick={() => {
                   createNews();
-                  console.log(createNewsObject, "Object");
                 }}
               >
                 {isSendingRequest ? (

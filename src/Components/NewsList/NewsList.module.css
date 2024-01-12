@@ -113,3 +113,14 @@
   line-height: 15px;
   cursor: pointer;
 }
+
+.noNews {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  opacity: 0.5;
+}

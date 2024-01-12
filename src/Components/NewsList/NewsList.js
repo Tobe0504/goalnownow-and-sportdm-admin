@@ -51,8 +51,8 @@ const NewsList = (props) => {
         </div>
       )}
 
-      {props.list.length < 0 && !isSendingRequest ? (
-        <div>No Ads found</div>
+      {props.list.length <= 0 && !isSendingRequest ? (
+        <div className={classes.noNews}>No News found</div>
       ) : (
         props.list.map((item, i) => {
           return (
@@ -61,17 +61,29 @@ const NewsList = (props) => {
                 <div
                   className={classes.leftSection}
                   onClick={() => {
-                    navigate(`/sportdm-news/edit/${item.uri}`);
+                    if (item.uri) {
+                      navigate(`/sportdm-news/edit/${item.uri}`);
+                    } else {
+                      navigate(`/sportdm-news/edit-created-news/${item.id}`);
+                    }
                   }}
                 >
-                  <div className={classes.adName}>{item.headline}</div>
+                  <div className={classes.adName}>
+                    {item?.headline || item.title}
+                  </div>
                 </div>
                 <div className={classes.rightSection}>
                   <div>
                     <FontAwesomeIcon
                       icon={faPencil}
                       onClick={() => {
-                        navigate(`/sportdm-news/edit/${item.uri}`);
+                        if (item.uri) {
+                          navigate(`/sportdm-news/edit/${item.uri}`);
+                        } else {
+                          navigate(
+                            `/sportdm-news/edit-created-news/${item.id}`
+                          );
+                        }
                       }}
                     />
                   </div>

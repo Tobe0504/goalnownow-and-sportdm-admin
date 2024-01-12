@@ -20,6 +20,8 @@ import SportDMKEAds from "./Containers/SportDMKEAds/SportDMKEAds";
 import GoalNowNowGhAds from "./Containers/GoalNowNowGhAds/GoalNowNowGhAds";
 import GoalNowNowKeAds from "./Containers/GoalNowNowKeAds/GoalNowNowKeAds";
 import CreateNewsContainer from "./Containers/CreateNewsContainer/CreateNewsContainer";
+import CreatedNewsContainer from "./Containers/CreatedNewsContainer/CreatedNewsContainer";
+import EditCreatedNews from "./Containers/EditCreatedNews/EditCreatedNews";
 
 function App() {
   return (
@@ -48,6 +50,10 @@ function App() {
           path="/sportdm-news/top-stories"
           element={<TopStoriesContainer />}
         />
+        <Route
+          path="/sportdm-news/created-news"
+          element={<CreatedNewsContainer />}
+        />
 
         <Route
           path="/sportdm-news/football-news"
@@ -71,6 +77,11 @@ function App() {
         <Route
           path="/sportdm-news/edit/:newsId"
           element={<EditNewsContainer />}
+        />
+
+        <Route
+          path="/sportdm-news/edit-created-news/:newsId"
+          element={<EditCreatedNews />}
         />
       </Route>
 

@@ -25,6 +25,7 @@ const SportDmNewsContextProvider = (props) => {
     body: "",
     image: "",
   });
+  const [success, setSuccess] = useState("");
 
   if (offsetValue > 100) {
     setOffsetValue(0);
@@ -181,6 +182,7 @@ const SportDmNewsContextProvider = (props) => {
   };
 
   const createNewsFormData = new FormData();
+  const updateNewsFormData = new FormData();
 
   useEffect(() => {
     createNewsFormData.append("title", createNewsObject.headline);
@@ -195,7 +197,6 @@ const SportDmNewsContextProvider = (props) => {
   }, [createNewsObject]);
 
   const createNews = () => {
-    setHeadlines([]);
     setIsSendingRequest(true);
     axios
       .post(
@@ -208,7 +209,36 @@ const SportDmNewsContextProvider = (props) => {
         }
       )
       .then((res) => {
-        // setHeadlines(res.data.data);
+        setSuccess(res.data.message);
+        console.log(res);
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        setIsSendingRequest(false);
+        setError(
+          err.response?.data?.errors
+            ? err?.response?.data?.errors.toString()
+            : err.message
+        );
+      });
+  };
+
+  const [createdNews, setCreatedNews] = useState([]);
+
+  const getCreatedNews = (id) => {
+    setIsSendingRequest(true);
+    axios
+      .get(
+        `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/newsList`
+      )
+      .then((res) => {
+        setCreatedNews(
+          res.data.posts.map((data) => {
+            return { ...data, isActive: false };
+          })
+        );
         console.log(res);
         setIsSendingRequest(false);
       })
@@ -217,6 +247,72 @@ const SportDmNewsContextProvider = (props) => {
         setError(err.response ? err?.response?.data?.message : err.message);
         console.log(err);
       });
+  };
+
+  const [particularCreatedNews, setParticularCreatedNews] = useState();
+
+  const getCreatedNewsById = (id) => {
+    if (id) {
+      setIsSendingRequest(true);
+      axios
+        .get(
+          `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/editNews/${id}`
+        )
+        .then((res) => {
+          setParticularCreatedNews(res.data.data);
+          console.log(res);
+          setIsSendingRequest(false);
+        })
+        .catch((err) => {
+          setIsSendingRequest(false);
+          setError(err.response ? err?.response?.data?.message : err.message);
+          console.log(err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (particularCreatedNews) {
+      updateNewsFormData.append("title", particularCreatedNews.title);
+      updateNewsFormData.append(
+        "short_description",
+        particularCreatedNews.short_description
+      );
+      updateNewsFormData.append(
+        "full_description",
+        particularCreatedNews.full_description
+      );
+      updateNewsFormData.append("image", particularCreatedNews.image);
+    }
+
+    console.log(updateNewsFormData, particularCreatedNews, 100);
+    // eslint-disable-next-line
+  }, [particularCreatedNews]);
+
+  const updateCreatedNews = (id) => {
+    if (id) {
+      setIsSendingRequest(true);
+      axios
+        .put(
+          `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/updateNews/${id}`,
+          updateNewsFormData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          setSuccess(res.data.data);
+          console.log(res);
+          setIsSendingRequest(false);
+        })
+        .catch((err) => {
+          setIsSendingRequest(false);
+          setError(err.response ? err?.response?.data?.message : err.message);
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {});
@@ -256,6 +352,15 @@ const SportDmNewsContextProvider = (props) => {
         createNewsObject,
         setCreateNewsObject,
         createNews,
+        createdNews,
+        getCreatedNews,
+        setCreatedNews,
+        getCreatedNewsById,
+        particularCreatedNews,
+        setParticularCreatedNews,
+        success,
+        setSuccess,
+        updateCreatedNews,
       }}
     >
       {props.children}
