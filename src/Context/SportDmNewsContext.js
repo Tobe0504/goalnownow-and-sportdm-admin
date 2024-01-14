@@ -293,7 +293,7 @@ const SportDmNewsContextProvider = (props) => {
     if (id) {
       setIsSendingRequest(true);
       axios
-        .put(
+        .post(
           `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/updateNews/${id}`,
           updateNewsFormData,
           {
@@ -315,7 +315,26 @@ const SportDmNewsContextProvider = (props) => {
     }
   };
 
-  useEffect(() => {});
+  const deleteNews = (id) => {
+    if (id) {
+      setIsSendingRequest(true);
+      axios
+        .delete(
+          `${process.env.REACT_APP_PRODUCTION_BACKEND_DOMAIN}/api/v1/editor/deleteNews/${id}`
+        )
+        .then((res) => {
+          setSuccess(res.data?.message);
+          console.log(res);
+          setIsSendingRequest(false);
+          getCreatedNews();
+        })
+        .catch((err) => {
+          setIsSendingRequest(false);
+          setError(err.response ? err?.response?.data?.message : err.message);
+          console.log(err);
+        });
+    }
+  };
   return (
     <SportDmNewsContext.Provider
       value={{
@@ -361,6 +380,7 @@ const SportDmNewsContextProvider = (props) => {
         success,
         setSuccess,
         updateCreatedNews,
+        deleteNews,
       }}
     >
       {props.children}

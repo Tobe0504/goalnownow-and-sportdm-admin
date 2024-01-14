@@ -1,9 +1,10 @@
 import classes from "./NewsList.module.css";
-import { CircularProgress } from "@mui/material";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import {
+  activeToggler,
   // activeToggler,
   activeTogglerAllFalse,
 } from "../../HelperFunctions/ActiveToggler";
@@ -12,8 +13,16 @@ import { SportDmNewsContext } from "../../Context/SportDmNewsContext";
 
 const NewsList = (props) => {
   // Context
-  const { isSendingRequest, setOffsetValue, offsetValue } =
-    useContext(SportDmNewsContext);
+  const {
+    isSendingRequest,
+    setOffsetValue,
+    offsetValue,
+    deleteNews,
+    success,
+    setSuccess,
+    error,
+    setError,
+  } = useContext(SportDmNewsContext);
 
   //   Navigate
   const navigate = useNavigate();
@@ -32,6 +41,30 @@ const NewsList = (props) => {
 
   return (
     <div className={classes.container}>
+      <Snackbar
+        open={Boolean(error)}
+        autoHideDuration={6000}
+        onClose={() => {
+          setError();
+        }}
+      >
+        <Alert severity="error" variant="outlined">
+          {error}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={Boolean(success)}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSuccess();
+        }}
+      >
+        <Alert severity="success" variant="outlined">
+          {success}
+        </Alert>
+      </Snackbar>
+
       {isSendingRequest && (
         <div
           style={{
@@ -87,13 +120,16 @@ const NewsList = (props) => {
                       }}
                     />
                   </div>
-                  {/* <div
-                    onClick={() => {
-                      activeToggler(i, props.list, props.setList);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </div> */}
+
+                  {!item?.uri && (
+                    <div
+                      onClick={() => {
+                        activeToggler(i, props.list, props.setList);
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </div>
+                  )}
                 </div>
               </div>
               <div
@@ -107,9 +143,9 @@ const NewsList = (props) => {
                 <p>Are you sure you want to delete?</p>
                 <button
                   className={classes.uploadButton}
-                  //   onClick={() => {
-                  //     deteleAd(item.id);
-                  //   }}
+                  onClick={() => {
+                    deleteNews(item.id);
+                  }}
                 >
                   Yes
                 </button>

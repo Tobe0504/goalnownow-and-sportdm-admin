@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../Components/Input/Input";
 import { CircularProgress, Alert, Snackbar } from "@mui/material";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const EditCreatedNews = () => {
   // Context
@@ -53,6 +55,12 @@ const EditCreatedNews = () => {
   const onChangeHandler = (e) => {
     setParticularCreatedNews((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleChange = (content, delta, source, editor) => {
+    setParticularCreatedNews((prevState) => {
+      return { ...prevState, full_description: content };
     });
   };
 
@@ -123,7 +131,7 @@ const EditCreatedNews = () => {
                 navigate(-1);
               }}
             >
-              Edit news {particularCreatedNews?.title}
+              Edit news "{particularCreatedNews?.title}"
             </h4>
           </div>
 
@@ -167,14 +175,28 @@ const EditCreatedNews = () => {
             </div>
 
             <div className={classes.adDetailItem}>
-              <p>Body Text:</p>
+              <p>Body HTML:</p>
               <div>
                 <TextArea
                   type="text"
                   placeholder="Body Text"
                   name="full_description"
-                  onChange={onChangeHandler}
                   value={particularCreatedNews.full_description}
+                  readOnly
+                />
+              </div>
+            </div>
+
+            <div
+              className={classes.adDetailItem}
+              style={{ marginBottom: "4rem" }}
+            >
+              <p>Body Text:</p>
+              <div>
+                <ReactQuill
+                  value={particularCreatedNews.full_description}
+                  onChange={handleChange}
+                  style={{ height: "200px" }}
                 />
               </div>
             </div>
