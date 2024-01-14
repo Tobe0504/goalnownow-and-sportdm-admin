@@ -30,7 +30,7 @@ const AuthContextProvider = (props) => {
 
   // Router
   const location = useLocation();
-  const redirectRoute = location.state || "/";
+  const redirectRoute = location.state || "/ads/goalnownow/ng";
   const navigate = useNavigate();
 
   // if (userToken) {

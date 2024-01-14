@@ -28,6 +28,7 @@ const CreateNewsContainer = () => {
   // navigate
   const navigate = useNavigate();
   const [imageView, setImageView] = useState("");
+  const [imageViews, setImageViews] = useState([]);
 
   const imageChangeHandler = (event) => {
     const selectedImage = event.target.files[0];
@@ -48,6 +49,53 @@ const CreateNewsContainer = () => {
     // Read the contents of the selected image file
     reader.readAsDataURL(selectedImage);
   };
+
+  // const imageChangeHandlerAlt = (event) => {
+  //   const selectedImage = event.target.files;
+
+  //   const reader = new FileReader();
+
+  //   reader.onload = (e) => {
+  //     console.log("Check");
+  //     setImageViews(e.target.result);
+
+  //     setCreateNewsObject((prevState) => {
+  //       return { ...prevState, images: selectedImage };
+  //     });
+  //     console.log(createNewsObject, "Create news");
+  //   };
+
+  //   // reader.readAsDataURL(selectedImage);
+  // };
+
+  const imageChangeHandlerAlt = (event) => {
+    const selectedImages = event.target.files;
+
+    const readers = Array.from(selectedImages).map((image) => {
+      const reader = new FileReader();
+
+      return new Promise((resolve) => {
+        reader.onload = (e) => {
+          resolve(e.target.result);
+        };
+
+        reader.readAsDataURL(image);
+      });
+    });
+
+    Promise.all(readers).then((imageResults) => {
+      console.log("Check");
+      setImageViews(imageResults);
+
+      setCreateNewsObject((prevState) => {
+        return { ...prevState, images: selectedImages };
+      });
+
+      console.log(createNewsObject, "Create news");
+    });
+  };
+
+  console.log(createNewsObject, "Hm");
 
   const onChangeHandler = (e) => {
     setCreateNewsObject((prevState) => {
@@ -178,7 +226,10 @@ const CreateNewsContainer = () => {
             </div>
           </div>
 
-          <div className={classes.adDetailItem}>
+          <div
+            className={classes.adDetailItem}
+            style={{ marginBottom: "3rem" }}
+          >
             <p>Body Text:</p>
             <div>
               <ReactQuill
@@ -203,6 +254,29 @@ const CreateNewsContainer = () => {
                   }}
                 />
                 <label htmlFor="imageChange">Upload Image</label>
+              </div>
+            </div>
+          </div>
+
+          <div className={classes.adDetailItem}>
+            <p>News Other Images</p>
+            <div>
+              <div className={classes.imageUpload}>
+                {createNewsObject.images &&
+                  imageViews.map((data, i) => {
+                    return <img src={data} alt="News " key={i} />;
+                  })}
+                <input
+                  type="file"
+                  id="imageChanges"
+                  max={3}
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => {
+                    imageChangeHandlerAlt(e);
+                  }}
+                />
+                <label htmlFor="imageChanges">Upload Images</label>
               </div>
             </div>
           </div>
