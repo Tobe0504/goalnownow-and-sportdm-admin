@@ -93,7 +93,7 @@ const EditCreatedNews = () => {
 
       {error && (
         <Snackbar
-          open={Boolean(alert)}
+          open={Boolean(error)}
           autoHideDuration={6000}
           onClose={() => {
             setError();
@@ -113,7 +113,7 @@ const EditCreatedNews = () => {
         }}
       >
         <Alert severity="success" variant="outlined">
-          {error}
+          {success}
         </Alert>
       </Snackbar>
       {particularCreatedNews && (

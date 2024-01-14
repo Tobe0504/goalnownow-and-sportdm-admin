@@ -39,8 +39,6 @@ const PlatformAds = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(location.pathname.split("/")[3]);
-
   return (
     <Layout>
       {alert && (

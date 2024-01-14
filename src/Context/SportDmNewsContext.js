@@ -133,7 +133,6 @@ const SportDmNewsContextProvider = (props) => {
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        // console.log(err);
         setIsSendingRequest(false);
         setError(err.message);
       });
@@ -210,12 +209,9 @@ const SportDmNewsContextProvider = (props) => {
       )
       .then((res) => {
         setSuccess(res.data.message);
-        console.log(res);
         setIsSendingRequest(false);
       })
       .catch((err) => {
-        console.log(err);
-
         setIsSendingRequest(false);
         setError(
           err.response?.data?.errors
@@ -239,13 +235,11 @@ const SportDmNewsContextProvider = (props) => {
             return { ...data, isActive: false };
           })
         );
-        console.log(res);
         setIsSendingRequest(false);
       })
       .catch((err) => {
         setIsSendingRequest(false);
         setError(err.response ? err?.response?.data?.message : err.message);
-        console.log(err);
       });
   };
 
@@ -260,13 +254,11 @@ const SportDmNewsContextProvider = (props) => {
         )
         .then((res) => {
           setParticularCreatedNews(res.data.data);
-          console.log(res);
           setIsSendingRequest(false);
         })
         .catch((err) => {
           setIsSendingRequest(false);
           setError(err.response ? err?.response?.data?.message : err.message);
-          console.log(err);
         });
     }
   };
@@ -285,7 +277,6 @@ const SportDmNewsContextProvider = (props) => {
       updateNewsFormData.append("image", particularCreatedNews.image);
     }
 
-    console.log(updateNewsFormData, particularCreatedNews, 100);
     // eslint-disable-next-line
   }, [particularCreatedNews]);
 
@@ -303,14 +294,12 @@ const SportDmNewsContextProvider = (props) => {
           }
         )
         .then((res) => {
-          setSuccess(res.data.data);
-          console.log(res);
+          setSuccess(res.data.message);
           setIsSendingRequest(false);
         })
         .catch((err) => {
           setIsSendingRequest(false);
           setError(err.response ? err?.response?.data?.message : err.message);
-          console.log(err);
         });
     }
   };
@@ -324,14 +313,12 @@ const SportDmNewsContextProvider = (props) => {
         )
         .then((res) => {
           setSuccess(res.data?.message);
-          console.log(res);
           setIsSendingRequest(false);
           getCreatedNews();
         })
         .catch((err) => {
           setIsSendingRequest(false);
           setError(err.response ? err?.response?.data?.message : err.message);
-          console.log(err);
         });
     }
   };

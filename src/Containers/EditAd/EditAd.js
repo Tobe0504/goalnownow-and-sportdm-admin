@@ -132,8 +132,6 @@ const EditAd = () => {
         })?.sections
       );
 
-    console.log(sectionArray, "section array");
-
     // eslint-disable-next-line
   }, [page]);
 
