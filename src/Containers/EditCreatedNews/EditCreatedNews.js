@@ -29,27 +29,31 @@ const EditCreatedNews = () => {
   // navigate
   const navigate = useNavigate();
 
-  const [imageView, setImageView] = useState("");
+  const [imageView, setImageView] = useState([]);
   const { newsId } = useParams();
 
   const imageChangeHandler = (event) => {
-    const selectedImage = event.target.files[0];
+    const selectedImages = event.target.files;
 
-    // Create a FileReader object to read the contents of the selected image file
-    const reader = new FileReader();
+    const readers = Array.from(selectedImages).map((image) => {
+      const reader = new FileReader();
 
-    // When the FileReader has finished reading the contents of the selected image file
-    reader.onload = (e) => {
-      // Set the image contents to the state
-      setImageView(e.target.result);
+      return new Promise((resolve) => {
+        reader.onload = (e) => {
+          resolve(e.target.result);
+        };
+
+        reader.readAsDataURL(image);
+      });
+    });
+
+    Promise.all(readers).then((imageResults) => {
+      setImageView(imageResults);
 
       setParticularCreatedNews((prevState) => {
-        return { ...prevState, image: selectedImage };
+        return { ...prevState, image: Array.from(selectedImages) };
       });
-    };
-
-    // Read the contents of the selected image file
-    reader.readAsDataURL(selectedImage);
+    });
   };
 
   const onChangeHandler = (e) => {
@@ -69,6 +73,11 @@ const EditCreatedNews = () => {
 
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (particularCreatedNews && particularCreatedNews?.image.length > 0)
+      setImageView(particularCreatedNews.image);
+  }, [particularCreatedNews]);
 
   return (
     <Layout>
@@ -205,16 +214,16 @@ const EditCreatedNews = () => {
               <p>News Image</p>
               <div>
                 <div className={classes.imageUpload}>
-                  {particularCreatedNews.image && (
-                    <img
-                      src={imageView || particularCreatedNews.image}
-                      alt="News"
-                    />
-                  )}
+                  {particularCreatedNews.image?.length > 0 &&
+                    imageView.map((data, i) => {
+                      return <img src={data} alt="News " key={i} />;
+                    })}
+
                   <input
                     type="file"
                     id="imageChange"
                     accept="image/*"
+                    multiple
                     onChange={(e) => {
                       imageChangeHandler(e);
                     }}

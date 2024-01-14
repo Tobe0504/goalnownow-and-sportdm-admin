@@ -27,28 +27,27 @@ const CreateNewsContainer = () => {
 
   // navigate
   const navigate = useNavigate();
-  const [imageView, setImageView] = useState("");
-  const [imageViews, setImageViews] = useState([]);
+  const [imageView, setImageView] = useState([]);
 
-  const imageChangeHandler = (event) => {
-    const selectedImage = event.target.files[0];
+  // const imageChangeHandler = (event) => {
+  //   const selectedImage = event.target.files;
 
-    // Create a FileReader object to read the contents of the selected image file
-    const reader = new FileReader();
+  //   // Create a FileReader object to read the contents of the selected image file
+  //   const reader = new FileReader();
 
-    // When the FileReader has finished reading the contents of the selected image file
-    reader.onload = (e) => {
-      // Set the image contents to the state
-      setImageView(e.target.result);
+  //   // When the FileReader has finished reading the contents of the selected image file
+  //   reader.onload = (e) => {
+  //     // Set the image contents to the state
+  //     setImageView(e.target.result);
 
-      setCreateNewsObject((prevState) => {
-        return { ...prevState, image: selectedImage };
-      });
-    };
+  //     setCreateNewsObject((prevState) => {
+  //       return { ...prevState, image: selectedImage };
+  //     });
+  //   };
 
-    // Read the contents of the selected image file
-    reader.readAsDataURL(selectedImage);
-  };
+  //   // Read the contents of the selected image file
+  //   reader.readAsDataURL(selectedImage);
+  // };
 
   // const imageChangeHandlerAlt = (event) => {
   //   const selectedImage = event.target.files;
@@ -68,7 +67,9 @@ const CreateNewsContainer = () => {
   //   // reader.readAsDataURL(selectedImage);
   // };
 
-  const imageChangeHandlerAlt = (event) => {
+  console.log(createNewsObject, "Hmm");
+
+  const imageChangeHandler = (event) => {
     const selectedImages = event.target.files;
 
     const readers = Array.from(selectedImages).map((image) => {
@@ -85,17 +86,13 @@ const CreateNewsContainer = () => {
 
     Promise.all(readers).then((imageResults) => {
       console.log("Check");
-      setImageViews(imageResults);
+      setImageView(imageResults);
 
       setCreateNewsObject((prevState) => {
-        return { ...prevState, images: selectedImages };
+        return { ...prevState, image: Array.from(selectedImages) };
       });
-
-      console.log(createNewsObject, "Create news");
     });
   };
-
-  console.log(createNewsObject, "Hm");
 
   const onChangeHandler = (e) => {
     setCreateNewsObject((prevState) => {
@@ -241,24 +238,28 @@ const CreateNewsContainer = () => {
           </div>
 
           <div className={classes.adDetailItem}>
-            <p>News Image</p>
+            <p>News Images</p>
             <div>
               <div className={classes.imageUpload}>
-                {createNewsObject.image && <img src={imageView} alt="News" />}
+                {createNewsObject.image &&
+                  imageView.map((data, i) => {
+                    return <img src={data} alt="News " key={i} />;
+                  })}
                 <input
                   type="file"
                   id="imageChange"
                   accept="image/*"
+                  multiple
                   onChange={(e) => {
                     imageChangeHandler(e);
                   }}
                 />
-                <label htmlFor="imageChange">Upload Image</label>
+                <label htmlFor="imageChange">Upload Images</label>
               </div>
             </div>
           </div>
 
-          <div className={classes.adDetailItem}>
+          {/* <div className={classes.adDetailItem}>
             <p>News Other Images</p>
             <div>
               <div className={classes.imageUpload}>
@@ -279,7 +280,7 @@ const CreateNewsContainer = () => {
                 <label htmlFor="imageChanges">Upload Images</label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className={classes.buttonSection}>
             <span>

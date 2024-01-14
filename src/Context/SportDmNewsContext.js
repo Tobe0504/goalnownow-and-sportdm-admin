@@ -23,8 +23,7 @@ const SportDmNewsContextProvider = (props) => {
     headline: "",
     description: "",
     body: "",
-    image: "",
-    images: [],
+    image: [],
   });
   const [success, setSuccess] = useState("");
 
@@ -191,6 +190,12 @@ const SportDmNewsContextProvider = (props) => {
       createNewsObject.description
     );
     createNewsFormData.append("full_description", createNewsObject.body);
+
+    if (createNewsObject?.image?.length > 0) {
+      createNewsObject?.image?.forEach((file, index) => {
+        createNewsFormData.append(`image[${index}]`, file);
+      });
+    }
     createNewsFormData.append("image", createNewsObject.image);
 
     // eslint-disable-next-line
@@ -226,6 +231,7 @@ const SportDmNewsContextProvider = (props) => {
             ? err?.response?.data?.errors.toString()
             : err.message
         );
+        console.log(err, "create");
       });
   };
 
@@ -283,8 +289,12 @@ const SportDmNewsContextProvider = (props) => {
         "full_description",
         particularCreatedNews.full_description
       );
-      updateNewsFormData.append("image", particularCreatedNews.image);
-      updateNewsFormData.append("images", particularCreatedNews.images);
+
+      if (particularCreatedNews?.image?.length > 0) {
+        particularCreatedNews?.image?.forEach((file, index) => {
+          updateNewsFormData.append(`image[${index}]`, file);
+        });
+      }
     }
 
     // eslint-disable-next-line
