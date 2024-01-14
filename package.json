@@ -1,6 +1,5 @@
 {
   "name": "gnn-and-sportdm-admin",
-  "homepage": "https://tobe0504.github.io/goalnownow-and-sportdm-admin/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
