@@ -210,19 +210,6 @@ const CreateNewsContainer = () => {
             </div>
           </div>
 
-          <div className={classes.adDetailItem}>
-            <p>Body HTML:</p>
-            <div>
-              <TextArea
-                type="text"
-                placeholder="Body Text"
-                name="body"
-                value={createNewsObject.body}
-                readOnly
-              />
-            </div>
-          </div>
-
           <div
             className={classes.adDetailItem}
             style={{ marginBottom: "3rem" }}

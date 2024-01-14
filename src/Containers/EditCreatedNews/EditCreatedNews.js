@@ -10,6 +10,7 @@ import Input from "../../Components/Input/Input";
 import { CircularProgress, Alert, Snackbar } from "@mui/material";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useRef } from "react";
 
 const EditCreatedNews = () => {
   // Context
@@ -29,10 +30,14 @@ const EditCreatedNews = () => {
   // navigate
   const navigate = useNavigate();
 
+  // Refs
+  const imageFormatChanged = useRef(false);
+
   const [imageView, setImageView] = useState([]);
   const { newsId } = useParams();
 
   const imageChangeHandler = (event) => {
+    imageFormatChanged.current = true;
     const selectedImages = event.target.files;
 
     const readers = Array.from(selectedImages).map((image) => {
@@ -75,9 +80,17 @@ const EditCreatedNews = () => {
   }, []);
 
   useEffect(() => {
-    if (particularCreatedNews && particularCreatedNews?.image.length > 0)
+    if (
+      particularCreatedNews &&
+      particularCreatedNews?.image.length > 0 &&
+      !imageFormatChanged.current
+    )
       setImageView(particularCreatedNews.image);
+
+    // eslint-disable-next-line
   }, [particularCreatedNews]);
+
+  console.log(imageView, "Hmm");
 
   return (
     <Layout>
@@ -179,19 +192,6 @@ const EditCreatedNews = () => {
                   name="short_description"
                   onChange={onChangeHandler}
                   value={particularCreatedNews.short_description}
-                />
-              </div>
-            </div>
-
-            <div className={classes.adDetailItem}>
-              <p>Body HTML:</p>
-              <div>
-                <TextArea
-                  type="text"
-                  placeholder="Body Text"
-                  name="full_description"
-                  value={particularCreatedNews.full_description}
-                  readOnly
                 />
               </div>
             </div>
